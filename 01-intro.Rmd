@@ -1,0 +1,15 @@
+# Intro
+
+## `attach` a datframe
+
+- This creates a new environment
+
+```{r}
+attach(mtcars)
+plot(mpg, cyl)
+search() # list search paths for r objects -> the mtcars object is now a search path
+
+# http://adv-r.had.co.nz/Environments.html
+ls(envir=as.environment(mtcars))
+```
+

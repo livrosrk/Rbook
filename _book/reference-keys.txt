@@ -1,0 +1,16 @@
+how-to-read-this-book
+date-types
+d
+homogenoues
+vectors
+heterogenous
+lists
+d-1
+homogenoues-1
+matrices
+create-a-matrix
+heterogenous-1
+data-frames
+nd
+homogenoues-2
+arrays

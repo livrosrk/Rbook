@@ -1,0 +1,17 @@
+--- 
+title: "R"
+author: "Robin Kohrs"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+description: |
+  This is a book about what I learned with R
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# Some other stuff
+
+## `attach` a data frame
+
+

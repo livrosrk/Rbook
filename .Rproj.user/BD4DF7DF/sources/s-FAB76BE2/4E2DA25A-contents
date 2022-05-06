@@ -1,0 +1,57 @@
+# Date Types
+
+## 1D
+
+### Homogenoues
+
+#### Vectors
+
+- R has no scalars, only vectors. A scalar is a vector of length 1
+
+### Heterogenous
+
+#### Lists
+
+## 2D
+
+### Homogenoues
+
+#### Matrices
+
+###### Create a matrix
+
+- The matrix is filled first down the columns
+- To create a matrix you can give it the numbers and then provide the dimensions
+
+```{r, echo=F}
+z = matrix(seq(1,12),4,3)
+z
+
+# first to (and including) second row and second to third column
+z[1:2,2:3]
+
+# subsetting one column returns a vector
+z[,2]
+
+# dont drop matrix
+z[,2,drop=F]
+```
+
+### Heterogenous
+
+#### Data frames
+
+- Data frames are lists
+
+
+## nd
+
+### Homogenoues
+
+#### Arrays
+
+
+
+
+
+
