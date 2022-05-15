@@ -1,4 +1,4 @@
-# Date Types
+# Data Types
 
 ## 1D
 
@@ -20,7 +20,7 @@
 
 ###### Create a matrix
 
-- The matrix isfilled first down the columns
+- The matrix is filled first down the columns
 - To create a matrix you can give it the numbers and then provide the dimensions
 
 ```{r, echo=F}

@@ -1,5 +1,8 @@
-how-to-read-this-book
-date-types
+some-other-stuff
+attach-a-data-frame
+intro
+attach-a-datframe
+data-types
 d
 homogenoues
 vectors
@@ -14,3 +17,10 @@ data-frames
 nd
 homogenoues-2
 arrays
+dplyr
+what-is-tidy-select
+selecting-columns
+selecting-columns-based-on-regex
+selecting-columns-based-if-any-value-in-the-column-is-na
+selecting-columns-if-the-mean-is
+filtering-rows

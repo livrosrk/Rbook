@@ -1,0 +1,124 @@
+# Dplyr
+
+```{r message=F}
+library(dplyr)
+library(magrittr)
+```
+
+
+## Ressources
+
+- 
+
+## What is `tidy-select`
+
+- [Official docs here](https://dplyr.tidyverse.org/reference/select.html)
+
+- In the end you always want a boolean vector  that has the length of the number of columns
+
+## Selecting columns
+
+### Selecting columns based on regex
+
+- [Look here](https://tidyselect.r-lib.org/reference/starts_with.html) for all the possible helper functions.
+
+- If you wanna apply a regex yourself you can use the `matches`-function. However there are "helpers" e.g. `starts_with`...
+
+```{r select_regex}
+
+# select all columns with three characters
+mtcars %>% 
+  select(
+    matches("^[a-zA-Z]{3}$")
+  )
+
+# cant use logical vector is select (e.g select(mtcars, c(TRUE, FALSE))) does not work
+# Must be indexes!
+mtcars %>% 
+  select(
+      which(grepl("^[a-zA-Z]{3}$", names(.)))
+  )
+
+# select_if can use a boolean vector!! However is superseeded
+mtcars %>% 
+  select_if(
+      grepl("^[a-zA-Z]{3}$", names(.))
+  )
+
+
+# do the same in base r
+idx = grepl("^[a-zA-Z]{3}$", names(mtcars))
+mtcars[, idx]
+
+```
+
+
+### Selecting Columns based if any value in the column is `na`
+
+
+**Approach 1**
+
+> select(where(function(x){
+    mean(x) > ...
+}))
+
+
+```{r}
+mtcars[2,2] = NA
+mtcars %>% head
+
+# 1. 
+mtcars %>%
+  select(where(function(x) {
+    sum(is.na(x)) == 0
+  }))
+
+# 2. base r
+mtcars[, colSums(is.na(mtcars)) == 0]
+
+# 3. apply
+mtcars[, apply(mtcars, 2, function(x) sum(is.na(x)) == 0)]
+
+# using any
+mtcars[, apply(mtcars, 2, function(x) !any(is.na(x)))]
+```
+
+### Selecting Columns if the mean is > ...
+
+```{r}
+# add a string column
+mtcars["string"] = "a"
+
+# select only string columns or numeric ones with a mean > 10
+mtcars %>% 
+  select(
+    where(function(x){
+      if(is.numeric(x)){
+        mean(x) > 10
+      }else{
+        is.character(x) # must return true or false
+      }
+    })
+  )
+
+```
+
+
+### Select Columns if the first value in the column is ...
+
+```{r}
+mtcars %>% 
+  select(
+    where(
+      function(x)x[[1]] == "a"
+    )
+  )
+```
+
+
+
+
+
+## Filtering Rows
+
+

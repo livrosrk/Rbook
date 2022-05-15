@@ -5,10 +5,15 @@ p.caption {
 p code {
   white-space: inherit;
 }
-pre {
-  word-break: normal;
-  word-wrap: normal;
+
+pre.info {
+  background-color: transparent !important;
+  font-weight: 500;
 }
-pre code {
-  white-space: inherit;
+
+div.info{
+  background-color: cornflowerblue;
+  border-radius: .5rem;
+  margin: 1rem 0;
+  padding: 1rem;
 }
