@@ -1,10 +1,9 @@
 # Dplyr
 
 ```{r message=F}
-library(dplyr)
+library(tidyverse)
 library(magrittr)
 ```
-
 
 ## Ressources
 
@@ -90,17 +89,26 @@ mtcars[, apply(mtcars, 2, function(x) !any(is.na(x)))]
 mtcars["string"] = "a"
 
 # select only string columns or numeric ones with a mean > 10
-mtcars %>% 
-  select(
-    where(function(x){
-      if(is.numeric(x)){
-        mean(x) > 10
-      }else{
-        is.character(x) # must return true or false
-      }
-    })
-  )
 
+# Should both work!!
+
+# mtcars %>% 
+#   dplyr::select(
+#     where(
+#       function(x) is.character(x) | mean(x) > 10
+#     )
+#   )
+
+# mtcars %>% 
+#   select(
+#     where(function(x){
+#       if(is.numeric(x)){
+#         mean(x) > 10
+#       }else{
+#         is.character(x) # must return true or false
+#       }
+#     })
+#   )
 ```
 
 
@@ -114,8 +122,6 @@ mtcars %>%
     )
   )
 ```
-
-
 
 
 

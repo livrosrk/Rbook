@@ -23,7 +23,7 @@
 <meta name="author" content="Chapter 4 Dplyr | Robin Kohrs" />
 
 
-<meta name="date" content="2022-05-07" />
+<meta name="date" content="2022-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,14 +163,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="dplyr.html"><a href="dplyr.html"><i class="fa fa-check"></i><b>4</b> Dplyr</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="dplyr.html"><a href="dplyr.html#what-is-tidy-select"><i class="fa fa-check"></i><b>4.1</b> What is <code>tidy-select</code></a></li>
-<li class="chapter" data-level="4.2" data-path="dplyr.html"><a href="dplyr.html#selecting-columns"><i class="fa fa-check"></i><b>4.2</b> Selecting columns</a>
+<li class="chapter" data-level="4.1" data-path="dplyr.html"><a href="dplyr.html#ressources"><i class="fa fa-check"></i><b>4.1</b> Ressources</a></li>
+<li class="chapter" data-level="4.2" data-path="dplyr.html"><a href="dplyr.html#what-is-tidy-select"><i class="fa fa-check"></i><b>4.2</b> What is <code>tidy-select</code></a></li>
+<li class="chapter" data-level="4.3" data-path="dplyr.html"><a href="dplyr.html#selecting-columns"><i class="fa fa-check"></i><b>4.3</b> Selecting columns</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="dplyr.html"><a href="dplyr.html#selecting-columns-based-on-regex"><i class="fa fa-check"></i><b>4.2.1</b> Selecting columns based on regex</a></li>
-<li class="chapter" data-level="4.2.2" data-path="dplyr.html"><a href="dplyr.html#selecting-columns-based-if-any-value-in-the-column-is-na"><i class="fa fa-check"></i><b>4.2.2</b> Selecting Columns based if any value in the column is <code>na</code></a></li>
-<li class="chapter" data-level="4.2.3" data-path="dplyr.html"><a href="dplyr.html#selecting-columns-if-the-mean-is"><i class="fa fa-check"></i><b>4.2.3</b> Selecting Columns if the mean is &gt; …</a></li>
+<li class="chapter" data-level="4.3.1" data-path="dplyr.html"><a href="dplyr.html#selecting-columns-based-on-regex"><i class="fa fa-check"></i><b>4.3.1</b> Selecting columns based on regex</a></li>
+<li class="chapter" data-level="4.3.2" data-path="dplyr.html"><a href="dplyr.html#selecting-columns-based-if-any-value-in-the-column-is-na"><i class="fa fa-check"></i><b>4.3.2</b> Selecting Columns based if any value in the column is <code>na</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="dplyr.html"><a href="dplyr.html#selecting-columns-if-the-mean-is"><i class="fa fa-check"></i><b>4.3.3</b> Selecting Columns if the mean is &gt; …</a></li>
+<li class="chapter" data-level="4.3.4" data-path="dplyr.html"><a href="dplyr.html#select-columns-if-the-first-value-in-the-column-is"><i class="fa fa-check"></i><b>4.3.4</b> Select Columns if the first value in the column is …</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="dplyr.html"><a href="dplyr.html#filtering-rows"><i class="fa fa-check"></i><b>4.3</b> Filtering Rows</a></li>
+<li class="chapter" data-level="4.4" data-path="dplyr.html"><a href="dplyr.html#filtering-rows"><i class="fa fa-check"></i><b>4.4</b> Filtering Rows</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -194,88 +196,421 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="dplyr" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Dplyr<a href="dplyr.html#dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="dplyr.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb29-2"><a href="dplyr.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
-<div id="what-is-tidy-select" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> What is <code>tidy-select</code><a href="dplyr.html#what-is-tidy-select" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="dplyr.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-2"><a href="dplyr.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
+<div id="ressources" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Ressources<a href="dplyr.html#ressources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><a href="https://dplyr.tidyverse.org/reference/select.html">Official docs here</a></li>
+<li></li>
 </ul>
 </div>
-<div id="selecting-columns" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Selecting columns<a href="dplyr.html#selecting-columns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="selecting-columns-based-on-regex" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Selecting columns based on regex<a href="dplyr.html#selecting-columns-based-on-regex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="what-is-tidy-select" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> What is <code>tidy-select</code><a href="dplyr.html#what-is-tidy-select" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p><a href="https://dplyr.tidyverse.org/reference/select.html">Official docs here</a></p></li>
+<li><p>In the end you always want a boolean vector that has the length of the number of columns</p></li>
+</ul>
+</div>
+<div id="selecting-columns" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Selecting columns<a href="dplyr.html#selecting-columns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="selecting-columns-based-on-regex" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Selecting columns based on regex<a href="dplyr.html#selecting-columns-based-on-regex" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><p><a href="https://tidyselect.r-lib.org/reference/starts_with.html">Look here</a> for all the possible helper functions.</p></li>
 <li><p>If you wanna apply a regex yourself you can use the <code>matches</code>-function. However there are “helpers” e.g. <code>starts_with</code>…</p></li>
 </ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="dplyr.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select all columns with three characters</span></span>
+<span id="cb16-2"><a href="dplyr.html#cb16-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="dplyr.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb16-4"><a href="dplyr.html#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matches</span>(<span class="st">&quot;^[a-zA-Z]{3}$&quot;</span>)</span>
+<span id="cb16-5"><a href="dplyr.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>##                      mpg cyl
+## Mazda RX4           21.0   6
+## Mazda RX4 Wag       21.0  NA
+## Datsun 710          22.8   4
+## Hornet 4 Drive      21.4   6
+## Hornet Sportabout   18.7   8
+## Valiant             18.1   6
+## Duster 360          14.3   8
+## Merc 240D           24.4   4
+## Merc 230            22.8   4
+## Merc 280            19.2   6
+## Merc 280C           17.8   6
+## Merc 450SE          16.4   8
+## Merc 450SL          17.3   8
+## Merc 450SLC         15.2   8
+## Cadillac Fleetwood  10.4   8
+## Lincoln Continental 10.4   8
+## Chrysler Imperial   14.7   8
+## Fiat 128            32.4   4
+## Honda Civic         30.4   4
+## Toyota Corolla      33.9   4
+## Toyota Corona       21.5   4
+## Dodge Challenger    15.5   8
+## AMC Javelin         15.2   8
+## Camaro Z28          13.3   8
+## Pontiac Firebird    19.2   8
+## Fiat X1-9           27.3   4
+## Porsche 914-2       26.0   4
+## Lotus Europa        30.4   4
+## Ford Pantera L      15.8   8
+## Ferrari Dino        19.7   6
+## Maserati Bora       15.0   8
+## Volvo 142E          21.4   4</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="dplyr.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cant use logical vector is select (e.g select(mtcars, c(TRUE, FALSE))) does not work</span></span>
+<span id="cb18-2"><a href="dplyr.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Must be indexes!</span></span>
+<span id="cb18-3"><a href="dplyr.html#cb18-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb18-4"><a href="dplyr.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb18-5"><a href="dplyr.html#cb18-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">&quot;^[a-zA-Z]{3}$&quot;</span>, <span class="fu">names</span>(.)))</span>
+<span id="cb18-6"><a href="dplyr.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>##                      mpg cyl
+## Mazda RX4           21.0   6
+## Mazda RX4 Wag       21.0  NA
+## Datsun 710          22.8   4
+## Hornet 4 Drive      21.4   6
+## Hornet Sportabout   18.7   8
+## Valiant             18.1   6
+## Duster 360          14.3   8
+## Merc 240D           24.4   4
+## Merc 230            22.8   4
+## Merc 280            19.2   6
+## Merc 280C           17.8   6
+## Merc 450SE          16.4   8
+## Merc 450SL          17.3   8
+## Merc 450SLC         15.2   8
+## Cadillac Fleetwood  10.4   8
+## Lincoln Continental 10.4   8
+## Chrysler Imperial   14.7   8
+## Fiat 128            32.4   4
+## Honda Civic         30.4   4
+## Toyota Corolla      33.9   4
+## Toyota Corona       21.5   4
+## Dodge Challenger    15.5   8
+## AMC Javelin         15.2   8
+## Camaro Z28          13.3   8
+## Pontiac Firebird    19.2   8
+## Fiat X1-9           27.3   4
+## Porsche 914-2       26.0   4
+## Lotus Europa        30.4   4
+## Ford Pantera L      15.8   8
+## Ferrari Dino        19.7   6
+## Maserati Bora       15.0   8
+## Volvo 142E          21.4   4</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="dplyr.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select_if can use a boolean vector!! However is superseeded</span></span>
+<span id="cb20-2"><a href="dplyr.html#cb20-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="dplyr.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(</span>
+<span id="cb20-4"><a href="dplyr.html#cb20-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">&quot;^[a-zA-Z]{3}$&quot;</span>, <span class="fu">names</span>(.))</span>
+<span id="cb20-5"><a href="dplyr.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>##                      mpg cyl
+## Mazda RX4           21.0   6
+## Mazda RX4 Wag       21.0  NA
+## Datsun 710          22.8   4
+## Hornet 4 Drive      21.4   6
+## Hornet Sportabout   18.7   8
+## Valiant             18.1   6
+## Duster 360          14.3   8
+## Merc 240D           24.4   4
+## Merc 230            22.8   4
+## Merc 280            19.2   6
+## Merc 280C           17.8   6
+## Merc 450SE          16.4   8
+## Merc 450SL          17.3   8
+## Merc 450SLC         15.2   8
+## Cadillac Fleetwood  10.4   8
+## Lincoln Continental 10.4   8
+## Chrysler Imperial   14.7   8
+## Fiat 128            32.4   4
+## Honda Civic         30.4   4
+## Toyota Corolla      33.9   4
+## Toyota Corona       21.5   4
+## Dodge Challenger    15.5   8
+## AMC Javelin         15.2   8
+## Camaro Z28          13.3   8
+## Pontiac Firebird    19.2   8
+## Fiat X1-9           27.3   4
+## Porsche 914-2       26.0   4
+## Lotus Europa        30.4   4
+## Ford Pantera L      15.8   8
+## Ferrari Dino        19.7   6
+## Maserati Bora       15.0   8
+## Volvo 142E          21.4   4</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="dplyr.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># do the same in base r</span></span>
+<span id="cb22-2"><a href="dplyr.html#cb22-2" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">=</span> <span class="fu">grepl</span>(<span class="st">&quot;^[a-zA-Z]{3}$&quot;</span>, <span class="fu">names</span>(mtcars))</span>
+<span id="cb22-3"><a href="dplyr.html#cb22-3" aria-hidden="true" tabindex="-1"></a>mtcars[, idx]</span></code></pre></div>
+<pre><code>##                      mpg cyl
+## Mazda RX4           21.0   6
+## Mazda RX4 Wag       21.0  NA
+## Datsun 710          22.8   4
+## Hornet 4 Drive      21.4   6
+## Hornet Sportabout   18.7   8
+## Valiant             18.1   6
+## Duster 360          14.3   8
+## Merc 240D           24.4   4
+## Merc 230            22.8   4
+## Merc 280            19.2   6
+## Merc 280C           17.8   6
+## Merc 450SE          16.4   8
+## Merc 450SL          17.3   8
+## Merc 450SLC         15.2   8
+## Cadillac Fleetwood  10.4   8
+## Lincoln Continental 10.4   8
+## Chrysler Imperial   14.7   8
+## Fiat 128            32.4   4
+## Honda Civic         30.4   4
+## Toyota Corolla      33.9   4
+## Toyota Corona       21.5   4
+## Dodge Challenger    15.5   8
+## AMC Javelin         15.2   8
+## Camaro Z28          13.3   8
+## Pontiac Firebird    19.2   8
+## Fiat X1-9           27.3   4
+## Porsche 914-2       26.0   4
+## Lotus Europa        30.4   4
+## Ford Pantera L      15.8   8
+## Ferrari Dino        19.7   6
+## Maserati Bora       15.0   8
+## Volvo 142E          21.4   4</code></pre>
 </div>
-<div id="selecting-columns-based-if-any-value-in-the-column-is-na" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Selecting Columns based if any value in the column is <code>na</code><a href="dplyr.html#selecting-columns-based-if-any-value-in-the-column-is-na" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="selecting-columns-based-if-any-value-in-the-column-is-na" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Selecting Columns based if any value in the column is <code>na</code><a href="dplyr.html#selecting-columns-based-if-any-value-in-the-column-is-na" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Approach 1</strong></p>
-<div class="info">
-<pre class="info">
-select(where(function(x){
-  some function over the columns 
-}))
-</pre>
-</div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="dplyr.html#cb30-1" aria-hidden="true" tabindex="-1"></a>this <span class="ot">=</span> <span class="st">&quot;rcode&quot;</span></span></code></pre></div>
-</div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="dplyr.html#cb31-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="cn">NA</span></span>
-<span id="cb31-2"><a href="dplyr.html#cb31-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> head</span></code></pre></div>
+<blockquote>
+<p>select(where(function(x){
+mean(x) &gt; …
+}))</p>
+</blockquote>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="dplyr.html#cb24-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="cn">NA</span></span>
+<span id="cb24-2"><a href="dplyr.html#cb24-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> head</span></code></pre></div>
 <pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 ## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
 ## Mazda RX4 Wag     21.0  NA  160 110 3.90 2.875 17.02  0  1    4    4
 ## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
 ## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="dplyr.html#cb33-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="dplyr.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb33-3"><a href="dplyr.html#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(<span class="cf">function</span>(x)<span class="fu">sum</span>(<span class="fu">is.na</span>(x)) <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb33-4"><a href="dplyr.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>##                      mpg  disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4           21.0 160.0 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag       21.0 160.0 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710          22.8 108.0  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive      21.4 258.0 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout   18.7 360.0 175 3.15 3.440 17.02  0  0    3    2
-## Valiant             18.1 225.0 105 2.76 3.460 20.22  1  0    3    1
-## Duster 360          14.3 360.0 245 3.21 3.570 15.84  0  0    3    4
-## Merc 240D           24.4 146.7  62 3.69 3.190 20.00  1  0    4    2
-## Merc 230            22.8 140.8  95 3.92 3.150 22.90  1  0    4    2
-## Merc 280            19.2 167.6 123 3.92 3.440 18.30  1  0    4    4
-## Merc 280C           17.8 167.6 123 3.92 3.440 18.90  1  0    4    4
-## Merc 450SE          16.4 275.8 180 3.07 4.070 17.40  0  0    3    3
-## Merc 450SL          17.3 275.8 180 3.07 3.730 17.60  0  0    3    3
-## Merc 450SLC         15.2 275.8 180 3.07 3.780 18.00  0  0    3    3
-## Cadillac Fleetwood  10.4 472.0 205 2.93 5.250 17.98  0  0    3    4
-## Lincoln Continental 10.4 460.0 215 3.00 5.424 17.82  0  0    3    4
-## Chrysler Imperial   14.7 440.0 230 3.23 5.345 17.42  0  0    3    4
-## Fiat 128            32.4  78.7  66 4.08 2.200 19.47  1  1    4    1
-## Honda Civic         30.4  75.7  52 4.93 1.615 18.52  1  1    4    2
-## Toyota Corolla      33.9  71.1  65 4.22 1.835 19.90  1  1    4    1
-## Toyota Corona       21.5 120.1  97 3.70 2.465 20.01  1  0    3    1
-## Dodge Challenger    15.5 318.0 150 2.76 3.520 16.87  0  0    3    2
-## AMC Javelin         15.2 304.0 150 3.15 3.435 17.30  0  0    3    2
-## Camaro Z28          13.3 350.0 245 3.73 3.840 15.41  0  0    3    4
-## Pontiac Firebird    19.2 400.0 175 3.08 3.845 17.05  0  0    3    2
-## Fiat X1-9           27.3  79.0  66 4.08 1.935 18.90  1  1    4    1
-## Porsche 914-2       26.0 120.3  91 4.43 2.140 16.70  0  1    5    2
-## Lotus Europa        30.4  95.1 113 3.77 1.513 16.90  1  1    5    2
-## Ford Pantera L      15.8 351.0 264 4.22 3.170 14.50  0  1    5    4
-## Ferrari Dino        19.7 145.0 175 3.62 2.770 15.50  0  1    5    6
-## Maserati Bora       15.0 301.0 335 3.54 3.570 14.60  0  1    5    8
-## Volvo 142E          21.4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                   string
+## Mazda RX4              a
+## Mazda RX4 Wag          a
+## Datsun 710             a
+## Hornet 4 Drive         a
+## Hornet Sportabout      a
+## Valiant                a</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="dplyr.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. </span></span>
+<span id="cb26-2"><a href="dplyr.html#cb26-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="dplyr.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="cf">function</span>(x) {</span>
+<span id="cb26-4"><a href="dplyr.html#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(<span class="fu">is.na</span>(x)) <span class="sc">==</span> <span class="dv">0</span></span>
+<span id="cb26-5"><a href="dplyr.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  }))</span></code></pre></div>
+<pre><code>##                      mpg  disp  hp drat    wt  qsec vs am gear carb string
+## Mazda RX4           21.0 160.0 110 3.90 2.620 16.46  0  1    4    4      a
+## Mazda RX4 Wag       21.0 160.0 110 3.90 2.875 17.02  0  1    4    4      a
+## Datsun 710          22.8 108.0  93 3.85 2.320 18.61  1  1    4    1      a
+## Hornet 4 Drive      21.4 258.0 110 3.08 3.215 19.44  1  0    3    1      a
+## Hornet Sportabout   18.7 360.0 175 3.15 3.440 17.02  0  0    3    2      a
+## Valiant             18.1 225.0 105 2.76 3.460 20.22  1  0    3    1      a
+## Duster 360          14.3 360.0 245 3.21 3.570 15.84  0  0    3    4      a
+## Merc 240D           24.4 146.7  62 3.69 3.190 20.00  1  0    4    2      a
+## Merc 230            22.8 140.8  95 3.92 3.150 22.90  1  0    4    2      a
+## Merc 280            19.2 167.6 123 3.92 3.440 18.30  1  0    4    4      a
+## Merc 280C           17.8 167.6 123 3.92 3.440 18.90  1  0    4    4      a
+## Merc 450SE          16.4 275.8 180 3.07 4.070 17.40  0  0    3    3      a
+## Merc 450SL          17.3 275.8 180 3.07 3.730 17.60  0  0    3    3      a
+## Merc 450SLC         15.2 275.8 180 3.07 3.780 18.00  0  0    3    3      a
+## Cadillac Fleetwood  10.4 472.0 205 2.93 5.250 17.98  0  0    3    4      a
+## Lincoln Continental 10.4 460.0 215 3.00 5.424 17.82  0  0    3    4      a
+## Chrysler Imperial   14.7 440.0 230 3.23 5.345 17.42  0  0    3    4      a
+## Fiat 128            32.4  78.7  66 4.08 2.200 19.47  1  1    4    1      a
+## Honda Civic         30.4  75.7  52 4.93 1.615 18.52  1  1    4    2      a
+## Toyota Corolla      33.9  71.1  65 4.22 1.835 19.90  1  1    4    1      a
+## Toyota Corona       21.5 120.1  97 3.70 2.465 20.01  1  0    3    1      a
+## Dodge Challenger    15.5 318.0 150 2.76 3.520 16.87  0  0    3    2      a
+## AMC Javelin         15.2 304.0 150 3.15 3.435 17.30  0  0    3    2      a
+## Camaro Z28          13.3 350.0 245 3.73 3.840 15.41  0  0    3    4      a
+## Pontiac Firebird    19.2 400.0 175 3.08 3.845 17.05  0  0    3    2      a
+## Fiat X1-9           27.3  79.0  66 4.08 1.935 18.90  1  1    4    1      a
+## Porsche 914-2       26.0 120.3  91 4.43 2.140 16.70  0  1    5    2      a
+## Lotus Europa        30.4  95.1 113 3.77 1.513 16.90  1  1    5    2      a
+## Ford Pantera L      15.8 351.0 264 4.22 3.170 14.50  0  1    5    4      a
+## Ferrari Dino        19.7 145.0 175 3.62 2.770 15.50  0  1    5    6      a
+## Maserati Bora       15.0 301.0 335 3.54 3.570 14.60  0  1    5    8      a
+## Volvo 142E          21.4 121.0 109 4.11 2.780 18.60  1  1    4    2      a</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="dplyr.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. base r</span></span>
+<span id="cb28-2"><a href="dplyr.html#cb28-2" aria-hidden="true" tabindex="-1"></a>mtcars[, <span class="fu">colSums</span>(<span class="fu">is.na</span>(mtcars)) <span class="sc">==</span> <span class="dv">0</span>]</span></code></pre></div>
+<pre><code>##                      mpg  disp  hp drat    wt  qsec vs am gear carb string
+## Mazda RX4           21.0 160.0 110 3.90 2.620 16.46  0  1    4    4      a
+## Mazda RX4 Wag       21.0 160.0 110 3.90 2.875 17.02  0  1    4    4      a
+## Datsun 710          22.8 108.0  93 3.85 2.320 18.61  1  1    4    1      a
+## Hornet 4 Drive      21.4 258.0 110 3.08 3.215 19.44  1  0    3    1      a
+## Hornet Sportabout   18.7 360.0 175 3.15 3.440 17.02  0  0    3    2      a
+## Valiant             18.1 225.0 105 2.76 3.460 20.22  1  0    3    1      a
+## Duster 360          14.3 360.0 245 3.21 3.570 15.84  0  0    3    4      a
+## Merc 240D           24.4 146.7  62 3.69 3.190 20.00  1  0    4    2      a
+## Merc 230            22.8 140.8  95 3.92 3.150 22.90  1  0    4    2      a
+## Merc 280            19.2 167.6 123 3.92 3.440 18.30  1  0    4    4      a
+## Merc 280C           17.8 167.6 123 3.92 3.440 18.90  1  0    4    4      a
+## Merc 450SE          16.4 275.8 180 3.07 4.070 17.40  0  0    3    3      a
+## Merc 450SL          17.3 275.8 180 3.07 3.730 17.60  0  0    3    3      a
+## Merc 450SLC         15.2 275.8 180 3.07 3.780 18.00  0  0    3    3      a
+## Cadillac Fleetwood  10.4 472.0 205 2.93 5.250 17.98  0  0    3    4      a
+## Lincoln Continental 10.4 460.0 215 3.00 5.424 17.82  0  0    3    4      a
+## Chrysler Imperial   14.7 440.0 230 3.23 5.345 17.42  0  0    3    4      a
+## Fiat 128            32.4  78.7  66 4.08 2.200 19.47  1  1    4    1      a
+## Honda Civic         30.4  75.7  52 4.93 1.615 18.52  1  1    4    2      a
+## Toyota Corolla      33.9  71.1  65 4.22 1.835 19.90  1  1    4    1      a
+## Toyota Corona       21.5 120.1  97 3.70 2.465 20.01  1  0    3    1      a
+## Dodge Challenger    15.5 318.0 150 2.76 3.520 16.87  0  0    3    2      a
+## AMC Javelin         15.2 304.0 150 3.15 3.435 17.30  0  0    3    2      a
+## Camaro Z28          13.3 350.0 245 3.73 3.840 15.41  0  0    3    4      a
+## Pontiac Firebird    19.2 400.0 175 3.08 3.845 17.05  0  0    3    2      a
+## Fiat X1-9           27.3  79.0  66 4.08 1.935 18.90  1  1    4    1      a
+## Porsche 914-2       26.0 120.3  91 4.43 2.140 16.70  0  1    5    2      a
+## Lotus Europa        30.4  95.1 113 3.77 1.513 16.90  1  1    5    2      a
+## Ford Pantera L      15.8 351.0 264 4.22 3.170 14.50  0  1    5    4      a
+## Ferrari Dino        19.7 145.0 175 3.62 2.770 15.50  0  1    5    6      a
+## Maserati Bora       15.0 301.0 335 3.54 3.570 14.60  0  1    5    8      a
+## Volvo 142E          21.4 121.0 109 4.11 2.780 18.60  1  1    4    2      a</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="dplyr.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. apply</span></span>
+<span id="cb30-2"><a href="dplyr.html#cb30-2" aria-hidden="true" tabindex="-1"></a>mtcars[, <span class="fu">apply</span>(mtcars, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)) <span class="sc">==</span> <span class="dv">0</span>)]</span></code></pre></div>
+<pre><code>##                      mpg  disp  hp drat    wt  qsec vs am gear carb string
+## Mazda RX4           21.0 160.0 110 3.90 2.620 16.46  0  1    4    4      a
+## Mazda RX4 Wag       21.0 160.0 110 3.90 2.875 17.02  0  1    4    4      a
+## Datsun 710          22.8 108.0  93 3.85 2.320 18.61  1  1    4    1      a
+## Hornet 4 Drive      21.4 258.0 110 3.08 3.215 19.44  1  0    3    1      a
+## Hornet Sportabout   18.7 360.0 175 3.15 3.440 17.02  0  0    3    2      a
+## Valiant             18.1 225.0 105 2.76 3.460 20.22  1  0    3    1      a
+## Duster 360          14.3 360.0 245 3.21 3.570 15.84  0  0    3    4      a
+## Merc 240D           24.4 146.7  62 3.69 3.190 20.00  1  0    4    2      a
+## Merc 230            22.8 140.8  95 3.92 3.150 22.90  1  0    4    2      a
+## Merc 280            19.2 167.6 123 3.92 3.440 18.30  1  0    4    4      a
+## Merc 280C           17.8 167.6 123 3.92 3.440 18.90  1  0    4    4      a
+## Merc 450SE          16.4 275.8 180 3.07 4.070 17.40  0  0    3    3      a
+## Merc 450SL          17.3 275.8 180 3.07 3.730 17.60  0  0    3    3      a
+## Merc 450SLC         15.2 275.8 180 3.07 3.780 18.00  0  0    3    3      a
+## Cadillac Fleetwood  10.4 472.0 205 2.93 5.250 17.98  0  0    3    4      a
+## Lincoln Continental 10.4 460.0 215 3.00 5.424 17.82  0  0    3    4      a
+## Chrysler Imperial   14.7 440.0 230 3.23 5.345 17.42  0  0    3    4      a
+## Fiat 128            32.4  78.7  66 4.08 2.200 19.47  1  1    4    1      a
+## Honda Civic         30.4  75.7  52 4.93 1.615 18.52  1  1    4    2      a
+## Toyota Corolla      33.9  71.1  65 4.22 1.835 19.90  1  1    4    1      a
+## Toyota Corona       21.5 120.1  97 3.70 2.465 20.01  1  0    3    1      a
+## Dodge Challenger    15.5 318.0 150 2.76 3.520 16.87  0  0    3    2      a
+## AMC Javelin         15.2 304.0 150 3.15 3.435 17.30  0  0    3    2      a
+## Camaro Z28          13.3 350.0 245 3.73 3.840 15.41  0  0    3    4      a
+## Pontiac Firebird    19.2 400.0 175 3.08 3.845 17.05  0  0    3    2      a
+## Fiat X1-9           27.3  79.0  66 4.08 1.935 18.90  1  1    4    1      a
+## Porsche 914-2       26.0 120.3  91 4.43 2.140 16.70  0  1    5    2      a
+## Lotus Europa        30.4  95.1 113 3.77 1.513 16.90  1  1    5    2      a
+## Ford Pantera L      15.8 351.0 264 4.22 3.170 14.50  0  1    5    4      a
+## Ferrari Dino        19.7 145.0 175 3.62 2.770 15.50  0  1    5    6      a
+## Maserati Bora       15.0 301.0 335 3.54 3.570 14.60  0  1    5    8      a
+## Volvo 142E          21.4 121.0 109 4.11 2.780 18.60  1  1    4    2      a</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="dplyr.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using any</span></span>
+<span id="cb32-2"><a href="dplyr.html#cb32-2" aria-hidden="true" tabindex="-1"></a>mtcars[, <span class="fu">apply</span>(mtcars, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="sc">!</span><span class="fu">any</span>(<span class="fu">is.na</span>(x)))]</span></code></pre></div>
+<pre><code>##                      mpg  disp  hp drat    wt  qsec vs am gear carb string
+## Mazda RX4           21.0 160.0 110 3.90 2.620 16.46  0  1    4    4      a
+## Mazda RX4 Wag       21.0 160.0 110 3.90 2.875 17.02  0  1    4    4      a
+## Datsun 710          22.8 108.0  93 3.85 2.320 18.61  1  1    4    1      a
+## Hornet 4 Drive      21.4 258.0 110 3.08 3.215 19.44  1  0    3    1      a
+## Hornet Sportabout   18.7 360.0 175 3.15 3.440 17.02  0  0    3    2      a
+## Valiant             18.1 225.0 105 2.76 3.460 20.22  1  0    3    1      a
+## Duster 360          14.3 360.0 245 3.21 3.570 15.84  0  0    3    4      a
+## Merc 240D           24.4 146.7  62 3.69 3.190 20.00  1  0    4    2      a
+## Merc 230            22.8 140.8  95 3.92 3.150 22.90  1  0    4    2      a
+## Merc 280            19.2 167.6 123 3.92 3.440 18.30  1  0    4    4      a
+## Merc 280C           17.8 167.6 123 3.92 3.440 18.90  1  0    4    4      a
+## Merc 450SE          16.4 275.8 180 3.07 4.070 17.40  0  0    3    3      a
+## Merc 450SL          17.3 275.8 180 3.07 3.730 17.60  0  0    3    3      a
+## Merc 450SLC         15.2 275.8 180 3.07 3.780 18.00  0  0    3    3      a
+## Cadillac Fleetwood  10.4 472.0 205 2.93 5.250 17.98  0  0    3    4      a
+## Lincoln Continental 10.4 460.0 215 3.00 5.424 17.82  0  0    3    4      a
+## Chrysler Imperial   14.7 440.0 230 3.23 5.345 17.42  0  0    3    4      a
+## Fiat 128            32.4  78.7  66 4.08 2.200 19.47  1  1    4    1      a
+## Honda Civic         30.4  75.7  52 4.93 1.615 18.52  1  1    4    2      a
+## Toyota Corolla      33.9  71.1  65 4.22 1.835 19.90  1  1    4    1      a
+## Toyota Corona       21.5 120.1  97 3.70 2.465 20.01  1  0    3    1      a
+## Dodge Challenger    15.5 318.0 150 2.76 3.520 16.87  0  0    3    2      a
+## AMC Javelin         15.2 304.0 150 3.15 3.435 17.30  0  0    3    2      a
+## Camaro Z28          13.3 350.0 245 3.73 3.840 15.41  0  0    3    4      a
+## Pontiac Firebird    19.2 400.0 175 3.08 3.845 17.05  0  0    3    2      a
+## Fiat X1-9           27.3  79.0  66 4.08 1.935 18.90  1  1    4    1      a
+## Porsche 914-2       26.0 120.3  91 4.43 2.140 16.70  0  1    5    2      a
+## Lotus Europa        30.4  95.1 113 3.77 1.513 16.90  1  1    5    2      a
+## Ford Pantera L      15.8 351.0 264 4.22 3.170 14.50  0  1    5    4      a
+## Ferrari Dino        19.7 145.0 175 3.62 2.770 15.50  0  1    5    6      a
+## Maserati Bora       15.0 301.0 335 3.54 3.570 14.60  0  1    5    8      a
+## Volvo 142E          21.4 121.0 109 4.11 2.780 18.60  1  1    4    2      a</code></pre>
 </div>
-<div id="selecting-columns-if-the-mean-is" class="section level3 hasAnchor" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> Selecting Columns if the mean is &gt; …<a href="dplyr.html#selecting-columns-if-the-mean-is" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="selecting-columns-if-the-mean-is" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Selecting Columns if the mean is &gt; …<a href="dplyr.html#selecting-columns-if-the-mean-is" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="dplyr.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a string column</span></span>
+<span id="cb34-2"><a href="dplyr.html#cb34-2" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="st">&quot;string&quot;</span>] <span class="ot">=</span> <span class="st">&quot;a&quot;</span></span>
+<span id="cb34-3"><a href="dplyr.html#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="dplyr.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># select only string columns or numeric ones with a mean &gt; 10</span></span>
+<span id="cb34-5"><a href="dplyr.html#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="dplyr.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Should both work!!</span></span>
+<span id="cb34-7"><a href="dplyr.html#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="dplyr.html#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars %&gt;% </span></span>
+<span id="cb34-9"><a href="dplyr.html#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::select(</span></span>
+<span id="cb34-10"><a href="dplyr.html#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     where(</span></span>
+<span id="cb34-11"><a href="dplyr.html#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       function(x) is.character(x) | mean(x) &gt; 10</span></span>
+<span id="cb34-12"><a href="dplyr.html#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     )</span></span>
+<span id="cb34-13"><a href="dplyr.html#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
+<span id="cb34-14"><a href="dplyr.html#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="dplyr.html#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars %&gt;% </span></span>
+<span id="cb34-16"><a href="dplyr.html#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(</span></span>
+<span id="cb34-17"><a href="dplyr.html#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     where(function(x){</span></span>
+<span id="cb34-18"><a href="dplyr.html#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="co">#       if(is.numeric(x)){</span></span>
+<span id="cb34-19"><a href="dplyr.html#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="co">#         mean(x) &gt; 10</span></span>
+<span id="cb34-20"><a href="dplyr.html#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="co">#       }else{</span></span>
+<span id="cb34-21"><a href="dplyr.html#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="co">#         is.character(x) # must return true or false</span></span>
+<span id="cb34-22"><a href="dplyr.html#cb34-22" aria-hidden="true" tabindex="-1"></a><span class="co">#       }</span></span>
+<span id="cb34-23"><a href="dplyr.html#cb34-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     })</span></span>
+<span id="cb34-24"><a href="dplyr.html#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span></code></pre></div>
+</div>
+<div id="select-columns-if-the-first-value-in-the-column-is" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Select Columns if the first value in the column is …<a href="dplyr.html#select-columns-if-the-first-value-in-the-column-is" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="dplyr.html#cb35-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="dplyr.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb35-3"><a href="dplyr.html#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(</span>
+<span id="cb35-4"><a href="dplyr.html#cb35-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">function</span>(x)x[[<span class="dv">1</span>]] <span class="sc">==</span> <span class="st">&quot;a&quot;</span></span>
+<span id="cb35-5"><a href="dplyr.html#cb35-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-6"><a href="dplyr.html#cb35-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>##                     string
+## Mazda RX4                a
+## Mazda RX4 Wag            a
+## Datsun 710               a
+## Hornet 4 Drive           a
+## Hornet Sportabout        a
+## Valiant                  a
+## Duster 360               a
+## Merc 240D                a
+## Merc 230                 a
+## Merc 280                 a
+## Merc 280C                a
+## Merc 450SE               a
+## Merc 450SL               a
+## Merc 450SLC              a
+## Cadillac Fleetwood       a
+## Lincoln Continental      a
+## Chrysler Imperial        a
+## Fiat 128                 a
+## Honda Civic              a
+## Toyota Corolla           a
+## Toyota Corona            a
+## Dodge Challenger         a
+## AMC Javelin              a
+## Camaro Z28               a
+## Pontiac Firebird         a
+## Fiat X1-9                a
+## Porsche 914-2            a
+## Lotus Europa             a
+## Ford Pantera L           a
+## Ferrari Dino             a
+## Maserati Bora            a
+## Volvo 142E               a</code></pre>
 </div>
 </div>
-<div id="filtering-rows" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Filtering Rows<a href="dplyr.html#filtering-rows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="filtering-rows" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Filtering Rows<a href="dplyr.html#filtering-rows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
