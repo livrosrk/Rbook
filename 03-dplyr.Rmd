@@ -121,4 +121,13 @@ mtcars %>%
 
 ## Filtering Rows
 
+## Rowwise Compute new Column with subset of existing columns
+
+```{r}
+mtcars %>% 
+  mutate(
+    med = pmap_dbl(select(., 2:ncol(.)), ~median(c(...)))
+  )  %>% glimpse
+```
+
 
