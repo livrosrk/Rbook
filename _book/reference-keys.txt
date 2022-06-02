@@ -18,9 +18,11 @@ nd
 homogenoues-2
 arrays
 dplyr
+ressources
 what-is-tidy-select
 selecting-columns
 selecting-columns-based-on-regex
 selecting-columns-based-if-any-value-in-the-column-is-na
 selecting-columns-if-the-mean-is
+select-columns-if-the-first-value-in-the-column-is
 filtering-rows
