@@ -1,3 +1,4 @@
+this-is-the-index-page
 intro
 attach-a-datframe
 data-types
@@ -27,7 +28,11 @@ filtering-rows
 rowwise-compute-new-column-with-subset-of-existing-columns
 adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group
 example-of-stackoverflow
-ggplot
-dplyr-and-list-columns
-purrrpmap
 list-columns-and-dplyr
+purrrpmap
+ggplot
+creating-list-columns
+nest
+summarise-and-list
+mutate-and-map
+manipulating

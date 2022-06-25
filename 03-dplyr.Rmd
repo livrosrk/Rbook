@@ -210,9 +210,126 @@ df %>%
 
 ## list Columns (and `dplyr`)
 
-- 
+```{r}
 
 
+```
+
+
+- tibbles and dataframes are lists of vectors!!
+```{r}
+l = tibble::tibble(x = runif(10),
+                   y = 1:10)
+
+typeof(l)
+```
+
+
+![](images/tibble.png)
+[image source: ](https://dcl-prog.stanford.edu/list-columns.html)
+
+
+- Meaning each column is a vector. Usually these are atomic vectors (recall chapter .. TODO in advanced R..), but these can also be lists.
+
+![](images/tibble-list-col.png)
+[image source: ](https://dcl-prog.stanford.edu/list-columns.html)
+
+- List columns are much more versatile than atomic vectors. They can contain atomic vectors, other lists, tibbles, ...
+
+
+### Creating List Columns
+
+- It seems to be common to create list columns by modifying an existing "normal" tibble. Three common ways are:
+
+  - `nest()`
+  - `summarise` and `list`
+  - `mutate` and `map`
+
+#### `nest()`
+
+- When calling `nest` the first argument is the new column-name. In this case it is `cars`.
+
+- The second argument are the columns you want to have in the resulting dataframe in each element of the list column.
+
+- Each column you do not specify automatically becomes a *grouping variable* and all the resulting tibble will have as many rows as unique combinations in these *grouping variables* there are.
+
+```{r}
+mtcars_with_list_col = mtcars %>%
+  mutate(name = rownames(.)) %>%
+  select(cyl, mpg, name) %>%
+  nest(cars = c(mpg, name))
+
+# inspect it
+str(mtcars_with_list_col)
+```
+
+#### `summarise` and `list`
+
+- Normally you use `group_by` and `summarise` to collapse groups into single rows. 
+
+- You can also use `group_by`, `summarise` and `list` to create atomic vectors where each vector corresponds to one group of `cyl`
+
+```{r}
+mtcars_names_per_cyl = mtcars %>%
+  mutate(name = rownames(.)) %>%
+  group_by(cyl) %>%
+  summarise(cars_per_cyl = list(name))
+```
+
+
+- What if you want to manipulate each vector before putting it into the list column
+
+
+```{r}
+mtcars_names_per_cyl_sorted = mtcars %>%
+  mutate(name = rownames(.)) %>%
+  group_by(cyl) %>%
+  summarise(cars_per_cyl = list(sort(name)))
+```
+
+
+#### `mutate` and `map`
+
+```{r}
+mtcars %>%
+  mutate(name = rownames(.)) %>%
+  mutate(random = map(name, ~ rnorm(n = str_length(.x)))) %>%
+  select(name, random)
+  
+```
+
+### Manipulating
+
+- say you want to get the number of rows for each data.frame in a list column
+
+
+**Version 1**
+
+```{r}
+
+mtcars %>%
+  mutate(name = rownames(.)) %>%
+  nest(data_per_cyl = !cyl) %>% 
+  mutate(
+    nrow_per_cyl = map_dbl(data_per_cyl, nrow)
+  )
+```
+
+**Version 2**
+
+- usig `rowwise`
+
+
+```{r}
+
+mtcars %>%
+  mutate(name = rownames(.)) %>%
+  nest(data_per_cyl = !cyl) %>% 
+  rowwise() %>%
+  mutate(
+    nrow_per_cyl = nrow(data_per_cyl)
+  )
+```
 
 ### ```purrr::pmap```
 
