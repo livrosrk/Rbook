@@ -1,5 +1,3 @@
-some-other-stuff
-attach-a-data-frame
 intro
 attach-a-datframe
 data-types
@@ -26,3 +24,7 @@ selecting-columns-based-if-any-value-in-the-column-is-na
 selecting-columns-if-the-mean-is
 select-columns-if-the-first-value-in-the-column-is
 filtering-rows
+rowwise-compute-new-column-with-subset-of-existing-columns
+adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group
+example-of-stackoverflow
+ggplot

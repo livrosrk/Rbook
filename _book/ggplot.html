@@ -4,23 +4,23 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Data Types | R</title>
+  <title>Chapter 5 GGPLOT | R</title>
   <meta name="description" content="This is a book about what I learned with R" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Data Types | R" />
+  <meta property="og:title" content="Chapter 5 GGPLOT | R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a book about what I learned with R" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Data Types | R" />
+  <meta name="twitter:title" content="Chapter 5 GGPLOT | R" />
   
   <meta name="twitter:description" content="This is a book about what I learned with R" />
   
 
-<meta name="author" content="Chapter 3 Data Types | Robin Kohrs" />
+<meta name="author" content="Chapter 5 GGPLOT | Robin Kohrs" />
 
 
 <meta name="date" content="2022-06-25" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro.html"/>
-<link rel="next" href="dplyr.html"/>
+<link rel="prev" href="dplyr.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -197,83 +197,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-types" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Data Types<a href="data-types.html#data-types" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="d" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> 1D<a href="data-types.html#d" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="homogenoues" class="section level3 hasAnchor" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Homogenoues<a href="data-types.html#homogenoues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="vectors" class="section level4 hasAnchor" number="3.1.1.1">
-<h4><span class="header-section-number">3.1.1.1</span> Vectors<a href="data-types.html#vectors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<ul>
-<li>R has no scalars, only vectors. A scalar is a vector of length 1</li>
-</ul>
-</div>
-</div>
-<div id="heterogenous" class="section level3 hasAnchor" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Heterogenous<a href="data-types.html#heterogenous" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="lists" class="section level4 hasAnchor" number="3.1.2.1">
-<h4><span class="header-section-number">3.1.2.1</span> Lists<a href="data-types.html#lists" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-</div>
-</div>
-</div>
-<div id="d-1" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> 2D<a href="data-types.html#d-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="homogenoues-1" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Homogenoues<a href="data-types.html#homogenoues-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="matrices" class="section level4 hasAnchor" number="3.2.1.1">
-<h4><span class="header-section-number">3.2.1.1</span> Matrices<a href="data-types.html#matrices" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div id="create-a-matrix" class="section level6 hasAnchor" number="3.2.1.1.0.1">
-<h6><span class="header-section-number">3.2.1.1.0.1</span> Create a matrix<a href="data-types.html#create-a-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h6>
-<ul>
-<li>The matrix is filled first down the columns</li>
-<li>To create a matrix you can give it the numbers and then provide the dimensions</li>
-</ul>
-<pre><code>##      [,1] [,2] [,3]
-## [1,]    1    5    9
-## [2,]    2    6   10
-## [3,]    3    7   11
-## [4,]    4    8   12</code></pre>
-<pre><code>##      [,1] [,2]
-## [1,]    5    9
-## [2,]    6   10</code></pre>
-<pre><code>## [1] 5 6 7 8</code></pre>
-<pre><code>##      [,1]
-## [1,]    5
-## [2,]    6
-## [3,]    7
-## [4,]    8</code></pre>
-</div>
-</div>
-</div>
-<div id="heterogenous-1" class="section level3 hasAnchor" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Heterogenous<a href="data-types.html#heterogenous-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="data-frames" class="section level4 hasAnchor" number="3.2.2.1">
-<h4><span class="header-section-number">3.2.2.1</span> Data frames<a href="data-types.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<ul>
-<li>Data frames are lists</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="nd" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> nd<a href="data-types.html#nd" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="homogenoues-2" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Homogenoues<a href="data-types.html#homogenoues-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="arrays" class="section level4 hasAnchor" number="3.3.1.1">
-<h4><span class="header-section-number">3.3.1.1</span> Arrays<a href="data-types.html#arrays" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="ggplot" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> GGPLOT<a href="ggplot.html#ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
-</div>
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dplyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dplyr.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -304,7 +238,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-datatypes.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-ggplot.Rmd",
 "text": "Edit"
 },
 "history": {

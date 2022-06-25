@@ -5,7 +5,7 @@
 - This creates a new environment
 
 ```{r}
-attach(mtcars)
+suppressMessages(attach(mtcars)) 
 plot(mpg, cyl)
 search() # list search paths for r objects -> the mtcars object is now a search path
 

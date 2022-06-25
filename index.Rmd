@@ -10,8 +10,5 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Some other stuff
-
-## `attach` a data frame
 
 

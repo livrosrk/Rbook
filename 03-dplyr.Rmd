@@ -7,8 +7,6 @@ library(magrittr)
 
 ## Ressources
 
-- 
-
 ## What is `tidy-select`
 
 - [Official docs here](https://dplyr.tidyverse.org/reference/select.html)
@@ -63,23 +61,25 @@ mtcars[, idx]
 
 
 ```{r}
-mtcars[2,2] = NA
-mtcars %>% head
+mtcars_copy = mtcars
+mtcars_copy[2,2] = NA
+mtcars_copy %>% head
 
 # 1. 
-mtcars %>%
+mtcars_copy %>%
   select(where(function(x) {
     sum(is.na(x)) == 0
   }))
 
 # 2. base r
-mtcars[, colSums(is.na(mtcars)) == 0]
+mtcars_copy[, colSums(is.na(mtcars_copy)) == 0]
 
 # 3. apply
-mtcars[, apply(mtcars, 2, function(x) sum(is.na(x)) == 0)]
+mtcars_copy[, apply(mtcars_copy, 2, function(x) sum(is.na(x)) == 0)]
 
 # using any
-mtcars[, apply(mtcars, 2, function(x) !any(is.na(x)))]
+mtcars_copy[, apply(mtcars_copy, 2, function(x) !any(is.na(x)))]
+
 ```
 
 ### Selecting Columns if the mean is > ...
@@ -132,7 +132,7 @@ mtcars %>%
 ```{r}
 mtcars %>% 
   mutate(
-    med = pmap_dbl(select(., 2:ncol(.)), ~median(c(...)))
+    med = pmap_dbl(select(., where(is.numeric)), ~median(c(...), na.rm = T))
   )  %>% glimpse
 ```
 
