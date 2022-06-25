@@ -1,0 +1,103 @@
+# Mapping
+
+
+## `base::apply`
+
+
+
+
+## `purr::map`
+
+### Find the number of NAs per column in a dataframe
+
+
+```{r}
+map(mtcars %>% select(where(is.numeric)), ~sum(is.na(.x)))
+```
+
+## `purrr::map2`
+
+
+```{r}
+df =
+  tibble(
+    a = c(1, 2, 4),
+    b = c(6, 5, 3)
+  )
+
+
+df %>% 
+  mutate(
+    min_a_b = map2_dbl(a,b,min)
+  )
+```
+
+By default, mutate() uses column-wise operations. map2_dbl() produces a column the same length at a and b. We can accomplish the same calculation using row-wise operations.
+
+```{r}
+df %>%
+  rowwise() %>%
+  mutate(min = min(a, b)) %>% ungroup()
+```
+
+
+## `purrr::pmap`
+
+- takes an arbitrary amout of lists as input.
+- However:
+
+<div style="background-color: salmon; padding: 1rem; border-radius: .5rem; text-align: center;">
+
+The actual input to `purrr::map` is <span style="font-weight: 900;"> ONE SINGLE LIST </span>
+
+</div>
+
+```{r}
+l1 = list(a = 1, b=2, c=3)
+l2 = list(a = 11, b=22, c=33)
+l3 = list(a = 111, b=222, c=333)
+
+l123 = list(l1, l2, l3)
+
+# go over the three lists in parallel and each time select the minimal value
+purrr::pmap(l123, min)
+
+# same as the first, goes over all inputs
+purrr::pmap(l123, ~min(c(...)))
+
+# only go over the first two
+purrr::pmap(l123, ~min(..2, ..3))
+
+
+
+```
+
+### Count the number of numeric columns
+
+```{r}
+# count the numeric columns
+
+mtcars %>% 
+  mutate(
+    min_numeric = pmap_dbl(select(., where(is.numeric)), ~length(c(...)))
+  ) %>% glimpse
+```
+
+
+### turn each row into a list
+
+```{r}
+# mtcars is a list (a dataframe) with 12 elements, iteratre simultaneously over each of them
+ready_for_d3 = purrr::pmap(mtcars, list)
+str(ready_for_d3)
+```
+
+
+
+
+
+
+
+
+
+
