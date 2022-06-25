@@ -208,6 +208,15 @@ df %>%
 ```
 
 
+## list Columns (and `dplyr`)
+
+- 
+
+
+
+### ```purrr::pmap```
+
+
 
 
 

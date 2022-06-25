@@ -28,3 +28,6 @@ rowwise-compute-new-column-with-subset-of-existing-columns
 adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group
 example-of-stackoverflow
 ggplot
+dplyr-and-list-columns
+purrrpmap
+list-columns-and-dplyr
