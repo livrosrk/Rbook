@@ -4,33 +4,33 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 GGPLOT | R</title>
+  <title>Chapter 6 GGPLOT | R</title>
   <meta name="description" content="This is a book about what I learned with R" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 GGPLOT | R" />
+  <meta property="og:title" content="Chapter 6 GGPLOT | R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a book about what I learned with R" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 GGPLOT | R" />
+  <meta name="twitter:title" content="Chapter 6 GGPLOT | R" />
   
   <meta name="twitter:description" content="This is a book about what I learned with R" />
   
 
-<meta name="author" content="Chapter 5 GGPLOT | Robin Kohrs" />
+<meta name="author" content="Chapter 6 GGPLOT | Robin Kohrs" />
 
 
-<meta name="date" content="2022-06-25" />
+<meta name="date" content="2022-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="dplyr.html"/>
+<link rel="prev" href="mapping.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -174,10 +174,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6" data-path="dplyr.html"><a href="dplyr.html#adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group"><i class="fa fa-check"></i><b>4.6</b> Adding column indicating if group if max value in group is in top-n max values per group</a></li>
 <li class="chapter" data-level="4.7" data-path="dplyr.html"><a href="dplyr.html#list-columns-and-dplyr"><i class="fa fa-check"></i><b>4.7</b> list Columns (and <code>dplyr</code>)</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="dplyr.html"><a href="dplyr.html#purrrpmap"><i class="fa fa-check"></i><b>4.7.1</b> <code>purrr::pmap</code></a></li>
+<li class="chapter" data-level="4.7.1" data-path="dplyr.html"><a href="dplyr.html#creating-list-columns"><i class="fa fa-check"></i><b>4.7.1</b> Creating List Columns</a></li>
+<li class="chapter" data-level="4.7.2" data-path="dplyr.html"><a href="dplyr.html#manipulating"><i class="fa fa-check"></i><b>4.7.2</b> Manipulating</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>5</b> GGPLOT</a></li>
+<li class="chapter" data-level="5" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>5</b> Mapping</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="mapping.html"><a href="mapping.html#baseapply"><i class="fa fa-check"></i><b>5.1</b> <code>base::apply</code></a></li>
+<li class="chapter" data-level="5.2" data-path="mapping.html"><a href="mapping.html#purrmap"><i class="fa fa-check"></i><b>5.2</b> <code>purr::map</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="mapping.html"><a href="mapping.html#find-the-number-of-nas-per-column-in-a-dataframe"><i class="fa fa-check"></i><b>5.2.1</b> Find the number of NAs per column in a dataframe</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="mapping.html"><a href="mapping.html#purrrmap2"><i class="fa fa-check"></i><b>5.3</b> <code>purrr::map2</code></a></li>
+<li class="chapter" data-level="5.4" data-path="mapping.html"><a href="mapping.html#purrrpmap"><i class="fa fa-check"></i><b>5.4</b> <code>purrr::pmap</code></a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="mapping.html"><a href="mapping.html#count-the-number-of-numeric-columns"><i class="fa fa-check"></i><b>5.4.1</b> Count the number of numeric columns</a></li>
+<li class="chapter" data-level="5.4.2" data-path="mapping.html"><a href="mapping.html#turn-each-row-into-a-list"><i class="fa fa-check"></i><b>5.4.2</b> turn each row into a list</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>6</b> GGPLOT</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="ggplot.html"><a href="ggplot.html#internals"><i class="fa fa-check"></i><b>6.1</b> Internals</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="ggplot.html"><a href="ggplot.html#inspecting-a-horizontal-stacked-bar-chart"><i class="fa fa-check"></i><b>6.1.1</b> Inspecting a Horizontal Stacked Bar Chart</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="ggplot.html"><a href="ggplot.html#examples"><i class="fa fa-check"></i><b>6.2</b> Examples</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="ggplot.html"><a href="ggplot.html#stacked-horizontal-chicklets"><i class="fa fa-check"></i><b>6.2.1</b> 1: Stacked Horizontal Chicklets</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -198,16 +223,270 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ggplot" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> GGPLOT<a href="ggplot.html#ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="ggplot" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> GGPLOT<a href="ggplot.html#ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="ggplot.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div id="internals" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Internals<a href="ggplot.html#internals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>The data</strong></p>
+<pre><code>##    names count share label   color
+## v1    v1    55  0.76  76 % #df91a3
+## v2    v2    13  0.18  18 % #A5AA99
+## v3    v3     2  0.03  &lt;NA&gt; #A5AA99
+## v4    v4     2  0.03  &lt;NA&gt; #A5AA99</code></pre>
+<div id="inspecting-a-horizontal-stacked-bar-chart" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Inspecting a Horizontal Stacked Bar Chart<a href="ggplot.html#inspecting-a-horizontal-stacked-bar-chart" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="ggplot.html#cb66-1" aria-hidden="true" tabindex="-1"></a>pl_works <span class="ot">=</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb66-2"><a href="ggplot.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb66-3"><a href="ggplot.html#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> share,</span>
+<span id="cb66-4"><a href="ggplot.html#cb66-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">&quot;a&quot;</span>,</span>
+<span id="cb66-5"><a href="ggplot.html#cb66-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> names),</span>
+<span id="cb66-6"><a href="ggplot.html#cb66-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb66-7"><a href="ggplot.html#cb66-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> df<span class="sc">$</span>color,</span>
+<span id="cb66-8"><a href="ggplot.html#cb66-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> ggplot2<span class="sc">::</span><span class="fu">position_fill</span>()</span>
+<span id="cb66-9"><a href="ggplot.html#cb66-9" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb66-10"><a href="ggplot.html#cb66-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-11"><a href="ggplot.html#cb66-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-12"><a href="ggplot.html#cb66-12" aria-hidden="true" tabindex="-1"></a>pl_not_works <span class="ot">=</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb66-13"><a href="ggplot.html#cb66-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb66-14"><a href="ggplot.html#cb66-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> share,</span>
+<span id="cb66-15"><a href="ggplot.html#cb66-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="dv">1</span>,</span>
+<span id="cb66-16"><a href="ggplot.html#cb66-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> names),</span>
+<span id="cb66-17"><a href="ggplot.html#cb66-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb66-18"><a href="ggplot.html#cb66-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> df<span class="sc">$</span>color,</span>
+<span id="cb66-19"><a href="ggplot.html#cb66-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> ggplot2<span class="sc">::</span><span class="fu">position_fill</span>()</span>
+<span id="cb66-20"><a href="ggplot.html#cb66-20" aria-hidden="true" tabindex="-1"></a>  ) </span></code></pre></div>
+<div id="the-computed-data" class="section level5 hasAnchor" number="6.1.1.0.1">
+<h5><span class="header-section-number">6.1.1.0.1</span> The Computed Data<a href="ggplot.html#the-computed-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<ul>
+<li><p>The ggplot function <code>ggplot2::layer_data( &lt;plot-object&gt; )</code> gives you back the data that is used to draw the objects</p></li>
+<li><p>Similarly the <code>ggplot2::ggplot_build( &lt;plot-object&gt; )</code> gives you back a list with the elements <code>data</code> (again), <code>layout</code> and the actual plot already!</p></li>
+<li><p>As the <code>ggplot_build()</code>-function is a method (like print is), it could (in theory be used for other objects too). So you can inspect it with</p></li>
+</ul>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="ggplot.html#cb67-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">:::</span>ggplot_build.ggplot</span></code></pre></div>
+<pre><code>## function (plot) 
+## {
+##     plot &lt;- plot_clone(plot)
+##     if (length(plot$layers) == 0) {
+##         plot &lt;- plot + geom_blank()
+##     }
+##     layers &lt;- plot$layers
+##     layer_data &lt;- lapply(layers, function(y) y$layer_data(plot$data))
+##     scales &lt;- plot$scales
+##     by_layer &lt;- function(f) {
+##         out &lt;- vector(&quot;list&quot;, length(data))
+##         for (i in seq_along(data)) {
+##             out[[i]] &lt;- f(l = layers[[i]], d = data[[i]])
+##         }
+##         out
+##     }
+##     data &lt;- layer_data
+##     data &lt;- by_layer(function(l, d) l$setup_layer(d, plot))
+##     layout &lt;- create_layout(plot$facet, plot$coordinates)
+##     data &lt;- layout$setup(data, plot$data, plot$plot_env)
+##     data &lt;- by_layer(function(l, d) l$compute_aesthetics(d, plot))
+##     data &lt;- lapply(data, scales_transform_df, scales = scales)
+##     scale_x &lt;- function() scales$get_scales(&quot;x&quot;)
+##     scale_y &lt;- function() scales$get_scales(&quot;y&quot;)
+##     layout$train_position(data, scale_x(), scale_y())
+##     data &lt;- layout$map_position(data)
+##     data &lt;- by_layer(function(l, d) l$compute_statistic(d, layout))
+##     data &lt;- by_layer(function(l, d) l$map_statistic(d, plot))
+##     scales_add_missing(plot, c(&quot;x&quot;, &quot;y&quot;), plot$plot_env)
+##     data &lt;- by_layer(function(l, d) l$compute_geom_1(d))
+##     data &lt;- by_layer(function(l, d) l$compute_position(d, layout))
+##     layout$reset_scales()
+##     layout$train_position(data, scale_x(), scale_y())
+##     layout$setup_panel_params()
+##     data &lt;- layout$map_position(data)
+##     npscales &lt;- scales$non_position_scales()
+##     if (npscales$n() &gt; 0) {
+##         lapply(data, scales_train_df, scales = npscales)
+##         data &lt;- lapply(data, scales_map_df, scales = npscales)
+##     }
+##     data &lt;- by_layer(function(l, d) l$compute_geom_2(d))
+##     data &lt;- by_layer(function(l, d) l$finish_statistics(d))
+##     data &lt;- layout$finish_data(data)
+##     plot$labels$alt &lt;- get_alt_text(plot)
+##     structure(list(data = data, layout = layout, plot = plot), 
+##         class = &quot;ggplot_built&quot;)
+## }
+## &lt;bytecode: 0x559a8094f150&gt;
+## &lt;environment: namespace:ggplot2&gt;</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="ggplot.html#cb69-1" aria-hidden="true" tabindex="-1"></a>ld_works <span class="ot">=</span> <span class="fu">layer_data</span>(pl_works) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">works =</span> <span class="st">&quot;y&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb69-2"><a href="ggplot.html#cb69-2" aria-hidden="true" tabindex="-1"></a>ld_not_works <span class="ot">=</span> <span class="fu">layer_data</span>(pl_not_works) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">works =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="ggplot.html#cb70-1" aria-hidden="true" tabindex="-1"></a>curve_df <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb70-2"><a href="ggplot.html#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> .<span class="dv">2</span>,</span>
+<span id="cb70-3"><a href="ggplot.html#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="dv">1</span>,</span>
+<span id="cb70-4"><a href="ggplot.html#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xend =</span> .<span class="dv">7</span>,</span>
+<span id="cb70-5"><a href="ggplot.html#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">yend =</span> <span class="fl">1.2</span></span>
+<span id="cb70-6"><a href="ggplot.html#cb70-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb70-7"><a href="ggplot.html#cb70-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="ggplot.html#cb70-8" aria-hidden="true" tabindex="-1"></a>pl_works <span class="sc">+</span></span>
+<span id="cb70-9"><a href="ggplot.html#cb70-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_curve</span>(<span class="at">data =</span> curve_df,</span>
+<span id="cb70-10"><a href="ggplot.html#cb70-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(</span>
+<span id="cb70-11"><a href="ggplot.html#cb70-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> x,</span>
+<span id="cb70-12"><a href="ggplot.html#cb70-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> y,</span>
+<span id="cb70-13"><a href="ggplot.html#cb70-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">xend =</span> xend,</span>
+<span id="cb70-14"><a href="ggplot.html#cb70-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">yend =</span> yend</span>
+<span id="cb70-15"><a href="ggplot.html#cb70-15" aria-hidden="true" tabindex="-1"></a>             ))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="examples" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Examples<a href="ggplot.html#examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="stacked-horizontal-chicklets" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> 1: Stacked Horizontal Chicklets<a href="ggplot.html#stacked-horizontal-chicklets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>From <a href="https://www.mikelee.co/posts/2020-02-08-recreate-fivethirtyeight-chicklet-stacked-bar-chart-in-ggplot2/">here</a></li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="ggplot.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
+<span id="cb71-2"><a href="ggplot.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;tidyverse/ggplot2&quot;)</span></span>
+<span id="cb71-3"><a href="ggplot.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb71-4"><a href="ggplot.html#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggchicklet)</span>
+<span id="cb71-5"><a href="ggplot.html#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb71-6"><a href="ggplot.html#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb71-7"><a href="ggplot.html#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb71-8"><a href="ggplot.html#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span>
+<span id="cb71-9"><a href="ggplot.html#cb71-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-10"><a href="ggplot.html#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="co"># import data</span></span>
+<span id="cb71-11"><a href="ggplot.html#cb71-11" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb71-12"><a href="ggplot.html#cb71-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sport =</span> <span class="fu">c</span>(<span class="st">&quot;NFL&quot;</span>, <span class="st">&quot;NFL&quot;</span>, <span class="st">&quot;NFL&quot;</span>, <span class="st">&quot;MLB&quot;</span>, <span class="st">&quot;MLB&quot;</span>, <span class="st">&quot;MLB&quot;</span>, <span class="st">&quot;NBA&quot;</span>, <span class="st">&quot;NBA&quot;</span>,</span>
+<span id="cb71-13"><a href="ggplot.html#cb71-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;NBA&quot;</span>, <span class="st">&quot;NHL&quot;</span>, <span class="st">&quot;NHL&quot;</span>, <span class="st">&quot;NHL&quot;</span>, <span class="st">&quot;EPL&quot;</span>, <span class="st">&quot;EPL&quot;</span>, <span class="st">&quot;EPL&quot;</span>),</span>
+<span id="cb71-14"><a href="ggplot.html#cb71-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Type =</span> <span class="fu">c</span>(<span class="st">&quot;Game Action&quot;</span>, <span class="st">&quot;Nonaction&quot;</span>, <span class="st">&quot;Commercials&quot;</span>, <span class="st">&quot;Game Action&quot;</span>, </span>
+<span id="cb71-15"><a href="ggplot.html#cb71-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Nonaction&quot;</span>, <span class="st">&quot;Commercials&quot;</span>, <span class="st">&quot;Game Action&quot;</span>, <span class="st">&quot;Nonaction&quot;</span>, <span class="st">&quot;Commercials&quot;</span>, </span>
+<span id="cb71-16"><a href="ggplot.html#cb71-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Game Action&quot;</span>, <span class="st">&quot;Nonaction&quot;</span>, <span class="st">&quot;Commercials&quot;</span>, <span class="st">&quot;Game Action&quot;</span>, <span class="st">&quot;Nonaction&quot;</span>, </span>
+<span id="cb71-17"><a href="ggplot.html#cb71-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Commercials&quot;</span>),</span>
+<span id="cb71-18"><a href="ggplot.html#cb71-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">Time =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="fl">140.6</span>, <span class="fl">49.9</span>, <span class="fl">22.5</span>, <span class="fl">150.9</span>, <span class="fl">51.8</span>, <span class="fl">49.6</span>, <span class="fl">61.8</span>,</span>
+<span id="cb71-19"><a href="ggplot.html#cb71-19" aria-hidden="true" tabindex="-1"></a>           <span class="fl">33.5</span>, <span class="dv">63</span>, <span class="fl">56.6</span>, <span class="fl">37.4</span>, <span class="fl">58.7</span>, <span class="fl">47.8</span>, <span class="fl">10.1</span>),</span>
+<span id="cb71-20"><a href="ggplot.html#cb71-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb71-21"><a href="ggplot.html#cb71-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-22"><a href="ggplot.html#cb71-22" aria-hidden="true" tabindex="-1"></a><span class="co"># refactor levels</span></span>
+<span id="cb71-23"><a href="ggplot.html#cb71-23" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Sport) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Percent =</span> Time<span class="sc">/</span><span class="fu">sum</span>(Time)) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb71-24"><a href="ggplot.html#cb71-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Sport =</span> <span class="fu">fct_relevel</span>(</span>
+<span id="cb71-25"><a href="ggplot.html#cb71-25" aria-hidden="true" tabindex="-1"></a>    Sport,</span>
+<span id="cb71-26"><a href="ggplot.html#cb71-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">&quot;NFL&quot;</span>, <span class="st">&quot;MLB&quot;</span>, <span class="st">&quot;NBA&quot;</span>, <span class="st">&quot;NHL&quot;</span>, <span class="st">&quot;EPL&quot;</span>)))</span>
+<span id="cb71-27"><a href="ggplot.html#cb71-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-28"><a href="ggplot.html#cb71-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Type =</span> <span class="fu">fct_relevel</span>(</span>
+<span id="cb71-29"><a href="ggplot.html#cb71-29" aria-hidden="true" tabindex="-1"></a>    Type,</span>
+<span id="cb71-30"><a href="ggplot.html#cb71-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">&quot;Commercials&quot;</span>,<span class="st">&quot;Nonaction&quot;</span>,<span class="st">&quot;Game Action&quot;</span>))</span>
+<span id="cb71-31"><a href="ggplot.html#cb71-31" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb71-32"><a href="ggplot.html#cb71-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-33"><a href="ggplot.html#cb71-33" aria-hidden="true" tabindex="-1"></a><span class="co"># keep trailing zeroes and add &quot;min&quot; to first bar value labels</span></span>
+<span id="cb71-34"><a href="ggplot.html#cb71-34" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">sprintf</span>(<span class="st">&quot;%.1f&quot;</span>, dat<span class="sc">$</span>Time))</span>
+<span id="cb71-35"><a href="ggplot.html#cb71-35" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dat<span class="sc">$</span>Type <span class="sc">==</span> <span class="st">&quot;Game Action&quot;</span>, <span class="fu">paste0</span>(dat<span class="sc">$</span>Label, <span class="st">&quot; min&quot;</span>), dat<span class="sc">$</span>Label)</span>
+<span id="cb71-36"><a href="ggplot.html#cb71-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-37"><a href="ggplot.html#cb71-37" aria-hidden="true" tabindex="-1"></a><span class="co"># generate plot</span></span>
+<span id="cb71-38"><a href="ggplot.html#cb71-38" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(Sport, Percent,  <span class="at">fill =</span> Type, <span class="at">label =</span> Label)) <span class="sc">+</span></span>
+<span id="cb71-39"><a href="ggplot.html#cb71-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_chicklet</span>(</span>
+<span id="cb71-40"><a href="ggplot.html#cb71-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">1</span>,</span>
+<span id="cb71-41"><a href="ggplot.html#cb71-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="fu">unit</span>(<span class="dv">6</span>, <span class="at">units =</span> <span class="st">&quot;pt&quot;</span>),</span>
+<span id="cb71-42"><a href="ggplot.html#cb71-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> ggplot2<span class="sc">::</span><span class="fu">position_stack</span>(<span class="at">reverse =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb71-43"><a href="ggplot.html#cb71-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb71-44"><a href="ggplot.html#cb71-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">size =</span> <span class="dv">4</span>,</span>
+<span id="cb71-45"><a href="ggplot.html#cb71-45" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">&quot;bold&quot;</span>,</span>
+<span id="cb71-46"><a href="ggplot.html#cb71-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb71-47"><a href="ggplot.html#cb71-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span>  </span>
+<span id="cb71-48"><a href="ggplot.html#cb71-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb71-49"><a href="ggplot.html#cb71-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb71-50"><a href="ggplot.html#cb71-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb71-51"><a href="ggplot.html#cb71-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>,</span>
+<span id="cb71-52"><a href="ggplot.html#cb71-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">&quot;Raleway&quot;</span>),</span>
+<span id="cb71-53"><a href="ggplot.html#cb71-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb71-54"><a href="ggplot.html#cb71-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(</span>
+<span id="cb71-55"><a href="ggplot.html#cb71-55" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb71-56"><a href="ggplot.html#cb71-56" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="dv">11</span>,</span>
+<span id="cb71-57"><a href="ggplot.html#cb71-57" aria-hidden="true" tabindex="-1"></a>      <span class="at">margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb71-58"><a href="ggplot.html#cb71-58" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;#718c9e&quot;</span></span>
+<span id="cb71-59"><a href="ggplot.html#cb71-59" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb71-60"><a href="ggplot.html#cb71-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb71-61"><a href="ggplot.html#cb71-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb71-62"><a href="ggplot.html#cb71-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb71-63"><a href="ggplot.html#cb71-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_markdown</span>(</span>
+<span id="cb71-64"><a href="ggplot.html#cb71-64" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb71-65"><a href="ggplot.html#cb71-65" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="dv">20</span>,</span>
+<span id="cb71-66"><a href="ggplot.html#cb71-66" aria-hidden="true" tabindex="-1"></a>      <span class="at">margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb71-67"><a href="ggplot.html#cb71-67" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;#718c9e&quot;</span></span>
+<span id="cb71-68"><a href="ggplot.html#cb71-68" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb71-69"><a href="ggplot.html#cb71-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb71-70"><a href="ggplot.html#cb71-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_markdown</span>(</span>
+<span id="cb71-71"><a href="ggplot.html#cb71-71" aria-hidden="true" tabindex="-1"></a>      <span class="at">halign =</span> <span class="dv">0</span>,</span>
+<span id="cb71-72"><a href="ggplot.html#cb71-72" aria-hidden="true" tabindex="-1"></a>      <span class="at">margin =</span> <span class="fu">margin</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">0</span>),</span>
+<span id="cb71-73"><a href="ggplot.html#cb71-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span></span>
+<span id="cb71-74"><a href="ggplot.html#cb71-74" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb71-75"><a href="ggplot.html#cb71-75" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb71-76"><a href="ggplot.html#cb71-76" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb71-77"><a href="ggplot.html#cb71-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb71-78"><a href="ggplot.html#cb71-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb71-79"><a href="ggplot.html#cb71-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb71-80"><a href="ggplot.html#cb71-80" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Game Action</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;#FA759F&quot;</span>,</span>
+<span id="cb71-81"><a href="ggplot.html#cb71-81" aria-hidden="true" tabindex="-1"></a>      <span class="at">Nonaction =</span> <span class="st">&quot;#B5BEC9&quot;</span>,</span>
+<span id="cb71-82"><a href="ggplot.html#cb71-82" aria-hidden="true" tabindex="-1"></a>      <span class="at">Commercials =</span> <span class="st">&quot;#72D4DB&quot;</span></span>
+<span id="cb71-83"><a href="ggplot.html#cb71-83" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb71-84"><a href="ggplot.html#cb71-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb71-85"><a href="ggplot.html#cb71-85" aria-hidden="true" tabindex="-1"></a>      <span class="co"># `Game Action` = &quot;&lt;strong style=&#39;color:#FA759F&#39;&gt;GAME ACTION&lt;/strong&gt; (BALL OR PUCK IN PLAY)&quot;,</span></span>
+<span id="cb71-86"><a href="ggplot.html#cb71-86" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Nonaction = &quot;&lt;strong style=&#39;color:#B5BEC9&#39;&gt;NONACTION&lt;/strong&gt; (GAME STOPPAGE, COMMENTARY, ETC.)&quot;,</span></span>
+<span id="cb71-87"><a href="ggplot.html#cb71-87" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Commercials = &quot;&lt;strong style=&#39;color:#72D4DB&#39;&gt;COMMERCIALS&lt;/strong&gt;&quot;)</span></span>
+<span id="cb71-88"><a href="ggplot.html#cb71-88" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Game Action</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;&lt;strong&gt;GAME ACTION&lt;/strong&gt; (BALL OR PUCK IN PLAY)&quot;</span>,</span>
+<span id="cb71-89"><a href="ggplot.html#cb71-89" aria-hidden="true" tabindex="-1"></a>      <span class="at">Nonaction =</span> <span class="st">&quot;&lt;strong&gt;NONACTION&lt;/strong&gt; (GAME STOPPAGE, COMMENTARY, ETC.)&quot;</span>,</span>
+<span id="cb71-90"><a href="ggplot.html#cb71-90" aria-hidden="true" tabindex="-1"></a>      <span class="at">Commercials =</span> <span class="st">&quot;&lt;strong&gt;COMMERCIALS&lt;/strong&gt;&quot;</span></span>
+<span id="cb71-91"><a href="ggplot.html#cb71-91" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb71-92"><a href="ggplot.html#cb71-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb71-93"><a href="ggplot.html#cb71-93" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb71-94"><a href="ggplot.html#cb71-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb71-95"><a href="ggplot.html#cb71-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;&lt;span style=&#39;font-size:13pt;&#39;&gt;The average share of broadcast time showing &lt;strong style=&#39;color:#FA759F&#39;&gt;GAME ACTION&lt;/strong&gt; is highest in&lt;br&gt;the English Premier League - but there is more total action in an average&lt;br&gt;National Hockey League game, which lasts longer.&lt;/span&gt;&quot;</span>,</span>
+<span id="cb71-96"><a href="ggplot.html#cb71-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb71-97"><a href="ggplot.html#cb71-97" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="cn">NULL</span>,</span>
+<span id="cb71-98"><a href="ggplot.html#cb71-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;&lt;b&gt;NFL and MLB games are long, slow affairs&lt;/b&gt;&quot;</span>,</span>
+<span id="cb71-99"><a href="ggplot.html#cb71-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Minutes by broadcast by what is shown on screen across five major men&#39;s sports leagues&quot;</span>,</span>
+<span id="cb71-100"><a href="ggplot.html#cb71-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Games that we included: 10 NFL regular-season games between Nov. 7 amd Nov. 18, 2019. 17 MLB postseason games, including all the games in the 2019</span></span>
+<span id="cb71-101"><a href="ggplot.html#cb71-101" aria-hidden="true" tabindex="-1"></a><span class="st">    ACLS, NLCS, and World&lt;br&gt;Series; 10 NBA regular-season games between Nov. 6 and Nov. 15, 2019; 10 NHL regular-season games between Nov. 5 and Nov. 19, 2019, including three overtime games;</span></span>
+<span id="cb71-102"><a href="ggplot.html#cb71-102" aria-hidden="true" tabindex="-1"></a><span class="st">    and&lt;br&gt;seven English Premier League games between Nov. 9 and Nov. 23, 2019. NBA game action includes free throws, so the action time exceeds the game time.&lt;br&gt;</span></span>
+<span id="cb71-103"><a href="ggplot.html#cb71-103" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;br&gt;</span></span>
+<span id="cb71-104"><a href="ggplot.html#cb71-104" aria-hidden="true" tabindex="-1"></a><span class="st">    FivethirtyEight SOURCE: UNIVERSITY OF TEXAS AT AUSTIN SPORTS ANALYTICS COURSE&quot;</span></span>
+<span id="cb71-105"><a href="ggplot.html#cb71-105" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb71-106"><a href="ggplot.html#cb71-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-107"><a href="ggplot.html#cb71-107" aria-hidden="true" tabindex="-1"></a>gg</span>
+<span id="cb71-108"><a href="ggplot.html#cb71-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-109"><a href="ggplot.html#cb71-109" aria-hidden="true" tabindex="-1"></a>alignTitles <span class="ot">&lt;-</span> <span class="cf">function</span>(ggplot, <span class="at">title =</span> <span class="cn">NULL</span>, <span class="at">subtitle =</span> <span class="cn">NULL</span>, <span class="at">caption =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb71-110"><a href="ggplot.html#cb71-110" aria-hidden="true" tabindex="-1"></a>  <span class="co"># grab the saved ggplot2 object</span></span>
+<span id="cb71-111"><a href="ggplot.html#cb71-111" aria-hidden="true" tabindex="-1"></a>  g <span class="ot">&lt;-</span> <span class="fu">ggplotGrob</span>(ggplot)</span>
+<span id="cb71-112"><a href="ggplot.html#cb71-112" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb71-113"><a href="ggplot.html#cb71-113" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb71-114"><a href="ggplot.html#cb71-114" aria-hidden="true" tabindex="-1"></a>  <span class="co"># find the object which provides the plot information for the title, subtitle, and caption</span></span>
+<span id="cb71-115"><a href="ggplot.html#cb71-115" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(title)) {</span>
+<span id="cb71-116"><a href="ggplot.html#cb71-116" aria-hidden="true" tabindex="-1"></a>    g<span class="sc">$</span>layout[<span class="fu">which</span>(g<span class="sc">$</span>layout<span class="sc">$</span>name <span class="sc">==</span> <span class="st">&quot;title&quot;</span>),]<span class="sc">$</span>l <span class="ot">&lt;-</span> title</span>
+<span id="cb71-117"><a href="ggplot.html#cb71-117" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb71-118"><a href="ggplot.html#cb71-118" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(subtitle)) {</span>
+<span id="cb71-119"><a href="ggplot.html#cb71-119" aria-hidden="true" tabindex="-1"></a>    g<span class="sc">$</span>layout[<span class="fu">which</span>(g<span class="sc">$</span>layout<span class="sc">$</span>name <span class="sc">==</span> <span class="st">&quot;subtitle&quot;</span>),]<span class="sc">$</span>l <span class="ot">&lt;-</span> subtitle</span>
+<span id="cb71-120"><a href="ggplot.html#cb71-120" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb71-121"><a href="ggplot.html#cb71-121" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(caption)) {</span>
+<span id="cb71-122"><a href="ggplot.html#cb71-122" aria-hidden="true" tabindex="-1"></a>    g<span class="sc">$</span>layout[<span class="fu">which</span>(g<span class="sc">$</span>layout<span class="sc">$</span>name <span class="sc">==</span> <span class="st">&quot;caption&quot;</span>),]<span class="sc">$</span>l <span class="ot">&lt;-</span> caption</span>
+<span id="cb71-123"><a href="ggplot.html#cb71-123" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb71-124"><a href="ggplot.html#cb71-124" aria-hidden="true" tabindex="-1"></a>  g</span>
+<span id="cb71-125"><a href="ggplot.html#cb71-125" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb71-126"><a href="ggplot.html#cb71-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-127"><a href="ggplot.html#cb71-127" aria-hidden="true" tabindex="-1"></a><span class="co"># align caption to y axis value labels</span></span>
+<span id="cb71-128"><a href="ggplot.html#cb71-128" aria-hidden="true" tabindex="-1"></a>gg2 <span class="ot">&lt;-</span> <span class="fu">alignTitles</span>(gg, <span class="at">caption =</span> <span class="dv">2</span>)</span>
+<span id="cb71-129"><a href="ggplot.html#cb71-129" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.draw</span>(gg2)</span>
+<span id="cb71-130"><a href="ggplot.html#cb71-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-131"><a href="ggplot.html#cb71-131" aria-hidden="true" tabindex="-1"></a><span class="co"># add arrow</span></span>
+<span id="cb71-132"><a href="ggplot.html#cb71-132" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.28</span>, <span class="fl">0.28</span>))</span>
+<span id="cb71-133"><a href="ggplot.html#cb71-133" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span>))</span>
+<span id="cb71-134"><a href="ggplot.html#cb71-134" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.bezier</span>(x, y, <span class="at">gp=</span><span class="fu">gpar</span>(<span class="at">lwd=</span><span class="fl">1.5</span>, <span class="at">fill=</span><span class="st">&quot;black&quot;</span>),</span>
+<span id="cb71-135"><a href="ggplot.html#cb71-135" aria-hidden="true" tabindex="-1"></a>            <span class="at">arrow=</span><span class="fu">arrow</span>(<span class="at">type=</span><span class="st">&quot;open&quot;</span>,<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">&quot;inches&quot;</span>)))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="dplyr.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mapping.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -239,7 +518,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-ggplot.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-ggplot.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -291,17 +291,17 @@ mtcars_names_per_cyl_sorted = mtcars %>%
 #### `mutate` and `map`
 
 ```{r}
-mtcars %>%
+n_values_per_car_letter = mtcars %>%
   mutate(name = rownames(.)) %>%
   mutate(random = map(name, ~ rnorm(n = str_length(.x)))) %>%
   select(name, random)
-  
+
+str(n_values_per_car_letter)  
 ```
 
 ### Manipulating
 
 - say you want to get the number of rows for each data.frame in a list column
-
 
 **Version 1**
 
@@ -330,18 +330,4 @@ mtcars %>%
     nrow_per_cyl = nrow(data_per_cyl)
   )
 ```
-
-### ```purrr::pmap```
-
-
-
-
-
-
-
-
-
-
-
-
 

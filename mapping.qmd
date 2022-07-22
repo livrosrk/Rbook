@@ -1,10 +1,11 @@
 # Mapping
 
+```{r echo=F}
+library(tidyverse)
+```
+
 
 ## `base::apply`
-
-
-
 
 ## `purr::map`
 
@@ -12,7 +13,7 @@
 
 
 ```{r}
-map(mtcars %>% select(where(is.numeric)), ~sum(is.na(.x)))
+purrr::map(mtcars %>% select(where(is.numeric)), ~sum(is.na(.x)))
 ```
 
 ## `purrr::map2`
