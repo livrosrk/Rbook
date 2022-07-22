@@ -27,25 +27,25 @@ library(magrittr)
 mtcars %>% 
   select(
     matches("^[a-zA-Z]{3}$")
-  )
+  ) %>% head
 
 # cant use logical vector is select (e.g select(mtcars, c(TRUE, FALSE))) does not work
 # Must be indexes!
 mtcars %>% 
   select(
-      which(grepl("^[a-zA-Z]{3}$", names(.)))
+      which(grepl("^[a-zA-Z]{3}$", names(.))) %>% head
   )
 
 # select_if can use a boolean vector!! However is superseeded
 mtcars %>% 
   select_if(
-      grepl("^[a-zA-Z]{3}$", names(.))
+      grepl("^[a-zA-Z]{3}$", names(.)) %>% head
   )
 
 
 # do the same in base r
 idx = grepl("^[a-zA-Z]{3}$", names(mtcars))
-mtcars[, idx]
+mtcars[, idx] %>% head
 
 ```
 

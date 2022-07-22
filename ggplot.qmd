@@ -48,14 +48,6 @@ df = data.frame(
 ```
 
 
-
-
-
-
-
-
-
-
 ## Internals
 
 **The data**
