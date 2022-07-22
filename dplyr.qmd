@@ -31,16 +31,12 @@ mtcars %>%
 
 # cant use logical vector is select (e.g select(mtcars, c(TRUE, FALSE))) does not work
 # Must be indexes!
-mtcars %>% 
-  select(
-      which(grepl("^[a-zA-Z]{3}$", names(.))) %>% head
-  )
+mtcars %>%
+  select(which(grepl("^[a-zA-Z]{3}$", names(.)))) %>% head
 
 # select_if can use a boolean vector!! However is superseeded
-mtcars %>% 
-  select_if(
-      grepl("^[a-zA-Z]{3}$", names(.)) %>% head
-  )
+mtcars %>%
+  select_if(grepl("^[a-zA-Z]{3}$", names(.))) %>% head
 
 
 # do the same in base r
@@ -69,7 +65,7 @@ mtcars_copy %>% head
 mtcars_copy %>%
   select(where(function(x) {
     sum(is.na(x)) == 0
-  }))
+  })) %>% head
 
 # 2. base r
 mtcars_copy[, colSums(is.na(mtcars_copy)) == 0]
@@ -92,23 +88,23 @@ mtcars["string"] = "a"
 
 # Should both work!!
 
-# mtcars %>% 
-#   dplyr::select(
-#     where(
-#       function(x) is.character(x) | mean(x) > 10
-#     )
-#   )
+mtcars %>%
+  dplyr::select(
+    where(
+      function(x) is.character(x) | mean(x) > 10
+    )
+  )
 
-# mtcars %>% 
-#   select(
-#     where(function(x){
-#       if(is.numeric(x)){
-#         mean(x) > 10
-#       }else{
-#         is.character(x) # must return true or false
-#       }
-#     })
-#   )
+mtcars %>%
+  select(
+    where(function(x){
+      if(is.numeric(x)){
+        mean(x) > 10
+      }else{
+        is.character(x) # must return true or false
+      }
+    })
+  )
 ```
 
 
@@ -122,6 +118,36 @@ mtcars %>%
     )
   )
 ```
+
+## where vs "normal" tidy select
+
+The docs say about where:
+
+> where(): Applies a function to all variables and selects those for which the function returns TRUE.
+
+So it essentially loops over the columns like lapply, whereas a code like this using the selection helpers only looks at the names of the variables:
+
+```{r}
+mtcars %>% select(matches("^d")) %>% head
+```
+
+
+This works because the "normal" select also takes indexes and by looping over the columns with `map_dbl` and checking which mean > 10 returns 1 we get the indexes
+
+```{r}
+library(purrr)
+mtcars %>% select(which(map_dbl(.,
+                                ~ mean(.x > 10)) == 1)) %>% head(n=2)
+```
+
+The same with `where` just that we need to take care of the string column as the function would return `NA` and that cant be used as index..
+
+```{r}
+library(purrr)
+mtcars %>% select(where(~mean(.x) > 10 & !is.na(mean(.x))))
+```
+
+
 
 
 

@@ -199,13 +199,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#selecting-columns-if-the-mean-is" id="toc-selecting-columns-if-the-mean-is" class="nav-link" data-scroll-target="#selecting-columns-if-the-mean-is"> <span class="header-section-number">4.3.3</span> Selecting Columns if the mean is &gt; …</a></li>
   <li><a href="#select-columns-if-the-first-value-in-the-column-is" id="toc-select-columns-if-the-first-value-in-the-column-is" class="nav-link" data-scroll-target="#select-columns-if-the-first-value-in-the-column-is"> <span class="header-section-number">4.3.4</span> Select Columns if the first value in the column is …</a></li>
   </ul></li>
-  <li><a href="#filtering-rows" id="toc-filtering-rows" class="nav-link" data-scroll-target="#filtering-rows"> <span class="header-section-number">4.4</span> Filtering Rows</a></li>
-  <li><a href="#rowwise-compute-new-column-with-subset-of-existing-columns" id="toc-rowwise-compute-new-column-with-subset-of-existing-columns" class="nav-link" data-scroll-target="#rowwise-compute-new-column-with-subset-of-existing-columns"> <span class="header-section-number">4.5</span> Rowwise Compute new Column with subset of existing columns</a></li>
-  <li><a href="#adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group" id="toc-adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group" class="nav-link" data-scroll-target="#adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group"> <span class="header-section-number">4.6</span> Adding column indicating if group if max value in group is in top-n max values per group</a></li>
-  <li><a href="#list-columns-and-dplyr" id="toc-list-columns-and-dplyr" class="nav-link" data-scroll-target="#list-columns-and-dplyr"> <span class="header-section-number">4.7</span> list Columns (and <code>dplyr</code>)</a>
+  <li><a href="#where-vs-normal-tidy-select" id="toc-where-vs-normal-tidy-select" class="nav-link" data-scroll-target="#where-vs-normal-tidy-select"> <span class="header-section-number">4.4</span> where vs “normal” tidy select</a></li>
+  <li><a href="#filtering-rows" id="toc-filtering-rows" class="nav-link" data-scroll-target="#filtering-rows"> <span class="header-section-number">4.5</span> Filtering Rows</a></li>
+  <li><a href="#rowwise-compute-new-column-with-subset-of-existing-columns" id="toc-rowwise-compute-new-column-with-subset-of-existing-columns" class="nav-link" data-scroll-target="#rowwise-compute-new-column-with-subset-of-existing-columns"> <span class="header-section-number">4.6</span> Rowwise Compute new Column with subset of existing columns</a></li>
+  <li><a href="#adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group" id="toc-adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group" class="nav-link" data-scroll-target="#adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group"> <span class="header-section-number">4.7</span> Adding column indicating if group if max value in group is in top-n max values per group</a></li>
+  <li><a href="#list-columns-and-dplyr" id="toc-list-columns-and-dplyr" class="nav-link" data-scroll-target="#list-columns-and-dplyr"> <span class="header-section-number">4.8</span> list Columns (and <code>dplyr</code>)</a>
   <ul class="collapse">
-  <li><a href="#creating-list-columns" id="toc-creating-list-columns" class="nav-link" data-scroll-target="#creating-list-columns"> <span class="header-section-number">4.7.1</span> Creating List Columns</a></li>
-  <li><a href="#manipulating" id="toc-manipulating" class="nav-link" data-scroll-target="#manipulating"> <span class="header-section-number">4.7.2</span> Manipulating</a></li>
+  <li><a href="#creating-list-columns" id="toc-creating-list-columns" class="nav-link" data-scroll-target="#creating-list-columns"> <span class="header-section-number">4.8.1</span> Creating List Columns</a></li>
+  <li><a href="#manipulating" id="toc-manipulating" class="nav-link" data-scroll-target="#manipulating"> <span class="header-section-number">4.8.2</span> Manipulating</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -256,160 +257,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">matches</span>(<span class="st">"^[a-zA-Z]{3}$"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl
-Mazda RX4           21.0   6
-Mazda RX4 Wag       21.0   6
-Datsun 710          22.8   4
-Hornet 4 Drive      21.4   6
-Hornet Sportabout   18.7   8
-Valiant             18.1   6
-Duster 360          14.3   8
-Merc 240D           24.4   4
-Merc 230            22.8   4
-Merc 280            19.2   6
-Merc 280C           17.8   6
-Merc 450SE          16.4   8
-Merc 450SL          17.3   8
-Merc 450SLC         15.2   8
-Cadillac Fleetwood  10.4   8
-Lincoln Continental 10.4   8
-Chrysler Imperial   14.7   8
-Fiat 128            32.4   4
-Honda Civic         30.4   4
-Toyota Corolla      33.9   4
-Toyota Corona       21.5   4
-Dodge Challenger    15.5   8
-AMC Javelin         15.2   8
-Camaro Z28          13.3   8
-Pontiac Firebird    19.2   8
-Fiat X1-9           27.3   4
-Porsche 914-2       26.0   4
-Lotus Europa        30.4   4
-Ford Pantera L      15.8   8
-Ferrari Dino        19.7   6
-Maserati Bora       15.0   8
-Volvo 142E          21.4   4</code></pre>
+<pre><code>                   mpg cyl
+Mazda RX4         21.0   6
+Mazda RX4 Wag     21.0   6
+Datsun 710        22.8   4
+Hornet 4 Drive    21.4   6
+Hornet Sportabout 18.7   8
+Valiant           18.1   6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cant use logical vector is select (e.g select(mtcars, c(TRUE, FALSE))) does not work</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Must be indexes!</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"^[a-zA-Z]{3}$"</span>, <span class="fu">names</span>(.)))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"^[a-zA-Z]{3}$"</span>, <span class="fu">names</span>(.)))) <span class="sc">%&gt;%</span> head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl
-Mazda RX4           21.0   6
-Mazda RX4 Wag       21.0   6
-Datsun 710          22.8   4
-Hornet 4 Drive      21.4   6
-Hornet Sportabout   18.7   8
-Valiant             18.1   6
-Duster 360          14.3   8
-Merc 240D           24.4   4
-Merc 230            22.8   4
-Merc 280            19.2   6
-Merc 280C           17.8   6
-Merc 450SE          16.4   8
-Merc 450SL          17.3   8
-Merc 450SLC         15.2   8
-Cadillac Fleetwood  10.4   8
-Lincoln Continental 10.4   8
-Chrysler Imperial   14.7   8
-Fiat 128            32.4   4
-Honda Civic         30.4   4
-Toyota Corolla      33.9   4
-Toyota Corona       21.5   4
-Dodge Challenger    15.5   8
-AMC Javelin         15.2   8
-Camaro Z28          13.3   8
-Pontiac Firebird    19.2   8
-Fiat X1-9           27.3   4
-Porsche 914-2       26.0   4
-Lotus Europa        30.4   4
-Ford Pantera L      15.8   8
-Ferrari Dino        19.7   6
-Maserati Bora       15.0   8
-Volvo 142E          21.4   4</code></pre>
+<pre><code>                   mpg cyl
+Mazda RX4         21.0   6
+Mazda RX4 Wag     21.0   6
+Datsun 710        22.8   4
+Hornet 4 Drive    21.4   6
+Hornet Sportabout 18.7   8
+Valiant           18.1   6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select_if can use a boolean vector!! However is superseeded</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"^[a-zA-Z]{3}$"</span>, <span class="fu">names</span>(.))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(<span class="fu">grepl</span>(<span class="st">"^[a-zA-Z]{3}$"</span>, <span class="fu">names</span>(.))) <span class="sc">%&gt;%</span> head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl
-Mazda RX4           21.0   6
-Mazda RX4 Wag       21.0   6
-Datsun 710          22.8   4
-Hornet 4 Drive      21.4   6
-Hornet Sportabout   18.7   8
-Valiant             18.1   6
-Duster 360          14.3   8
-Merc 240D           24.4   4
-Merc 230            22.8   4
-Merc 280            19.2   6
-Merc 280C           17.8   6
-Merc 450SE          16.4   8
-Merc 450SL          17.3   8
-Merc 450SLC         15.2   8
-Cadillac Fleetwood  10.4   8
-Lincoln Continental 10.4   8
-Chrysler Imperial   14.7   8
-Fiat 128            32.4   4
-Honda Civic         30.4   4
-Toyota Corolla      33.9   4
-Toyota Corona       21.5   4
-Dodge Challenger    15.5   8
-AMC Javelin         15.2   8
-Camaro Z28          13.3   8
-Pontiac Firebird    19.2   8
-Fiat X1-9           27.3   4
-Porsche 914-2       26.0   4
-Lotus Europa        30.4   4
-Ford Pantera L      15.8   8
-Ferrari Dino        19.7   6
-Maserati Bora       15.0   8
-Volvo 142E          21.4   4</code></pre>
+<pre><code>                   mpg cyl
+Mazda RX4         21.0   6
+Mazda RX4 Wag     21.0   6
+Datsun 710        22.8   4
+Hornet 4 Drive    21.4   6
+Hornet Sportabout 18.7   8
+Valiant           18.1   6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># do the same in base r</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">=</span> <span class="fu">grepl</span>(<span class="st">"^[a-zA-Z]{3}$"</span>, <span class="fu">names</span>(mtcars))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mtcars[, idx]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mtcars[, idx] <span class="sc">%&gt;%</span> head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl
-Mazda RX4           21.0   6
-Mazda RX4 Wag       21.0   6
-Datsun 710          22.8   4
-Hornet 4 Drive      21.4   6
-Hornet Sportabout   18.7   8
-Valiant             18.1   6
-Duster 360          14.3   8
-Merc 240D           24.4   4
-Merc 230            22.8   4
-Merc 280            19.2   6
-Merc 280C           17.8   6
-Merc 450SE          16.4   8
-Merc 450SL          17.3   8
-Merc 450SLC         15.2   8
-Cadillac Fleetwood  10.4   8
-Lincoln Continental 10.4   8
-Chrysler Imperial   14.7   8
-Fiat 128            32.4   4
-Honda Civic         30.4   4
-Toyota Corolla      33.9   4
-Toyota Corona       21.5   4
-Dodge Challenger    15.5   8
-AMC Javelin         15.2   8
-Camaro Z28          13.3   8
-Pontiac Firebird    19.2   8
-Fiat X1-9           27.3   4
-Porsche 914-2       26.0   4
-Lotus Europa        30.4   4
-Ford Pantera L      15.8   8
-Ferrari Dino        19.7   6
-Maserati Bora       15.0   8
-Volvo 142E          21.4   4</code></pre>
+<pre><code>                   mpg cyl
+Mazda RX4         21.0   6
+Mazda RX4 Wag     21.0   6
+Datsun 710        22.8   4
+Hornet 4 Drive    21.4   6
+Hornet Sportabout 18.7   8
+Valiant           18.1   6</code></pre>
 </div>
 </div>
 </section>
@@ -436,41 +329,15 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mtcars_copy <span class="sc">%&gt;%</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="cf">function</span>(x) {</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(<span class="fu">is.na</span>(x)) <span class="sc">==</span> <span class="dv">0</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  }))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  })) <span class="sc">%&gt;%</span> head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg  disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4           21.0 160.0 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag       21.0 160.0 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710          22.8 108.0  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive      21.4 258.0 110 3.08 3.215 19.44  1  0    3    1
-Hornet Sportabout   18.7 360.0 175 3.15 3.440 17.02  0  0    3    2
-Valiant             18.1 225.0 105 2.76 3.460 20.22  1  0    3    1
-Duster 360          14.3 360.0 245 3.21 3.570 15.84  0  0    3    4
-Merc 240D           24.4 146.7  62 3.69 3.190 20.00  1  0    4    2
-Merc 230            22.8 140.8  95 3.92 3.150 22.90  1  0    4    2
-Merc 280            19.2 167.6 123 3.92 3.440 18.30  1  0    4    4
-Merc 280C           17.8 167.6 123 3.92 3.440 18.90  1  0    4    4
-Merc 450SE          16.4 275.8 180 3.07 4.070 17.40  0  0    3    3
-Merc 450SL          17.3 275.8 180 3.07 3.730 17.60  0  0    3    3
-Merc 450SLC         15.2 275.8 180 3.07 3.780 18.00  0  0    3    3
-Cadillac Fleetwood  10.4 472.0 205 2.93 5.250 17.98  0  0    3    4
-Lincoln Continental 10.4 460.0 215 3.00 5.424 17.82  0  0    3    4
-Chrysler Imperial   14.7 440.0 230 3.23 5.345 17.42  0  0    3    4
-Fiat 128            32.4  78.7  66 4.08 2.200 19.47  1  1    4    1
-Honda Civic         30.4  75.7  52 4.93 1.615 18.52  1  1    4    2
-Toyota Corolla      33.9  71.1  65 4.22 1.835 19.90  1  1    4    1
-Toyota Corona       21.5 120.1  97 3.70 2.465 20.01  1  0    3    1
-Dodge Challenger    15.5 318.0 150 2.76 3.520 16.87  0  0    3    2
-AMC Javelin         15.2 304.0 150 3.15 3.435 17.30  0  0    3    2
-Camaro Z28          13.3 350.0 245 3.73 3.840 15.41  0  0    3    4
-Pontiac Firebird    19.2 400.0 175 3.08 3.845 17.05  0  0    3    2
-Fiat X1-9           27.3  79.0  66 4.08 1.935 18.90  1  1    4    1
-Porsche 914-2       26.0 120.3  91 4.43 2.140 16.70  0  1    5    2
-Lotus Europa        30.4  95.1 113 3.77 1.513 16.90  1  1    5    2
-Ford Pantera L      15.8 351.0 264 4.22 3.170 14.50  0  1    5    4
-Ferrari Dino        19.7 145.0 175 3.62 2.770 15.50  0  1    5    6
-Maserati Bora       15.0 301.0 335 3.54 3.570 14.60  0  1    5    8
-Volvo 142E          21.4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<pre><code>                   mpg disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. base r</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mtcars_copy[, <span class="fu">colSums</span>(<span class="fu">is.na</span>(mtcars_copy)) <span class="sc">==</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -595,34 +462,106 @@ Volvo 142E          21.4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Should both work!!</span></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars %&gt;% </span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   dplyr::select(</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     where(</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       function(x) is.character(x) | mean(x) &gt; 10</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     )</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars %&gt;% </span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     where(function(x){</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">#       if(is.numeric(x)){</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">#         mean(x) &gt; 10</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">#       }else{</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">#         is.character(x) # must return true or false</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#       }</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#     })</span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">#   )</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">function</span>(x) <span class="fu">is.character</span>(x) <span class="sc">|</span> <span class="fu">mean</span>(x) <span class="sc">&gt;</span> <span class="dv">10</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in mean.default(x): argument is not numeric or logical: returning NA</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg  disp  hp  qsec string
+Mazda RX4           21.0 160.0 110 16.46      a
+Mazda RX4 Wag       21.0 160.0 110 17.02      a
+Datsun 710          22.8 108.0  93 18.61      a
+Hornet 4 Drive      21.4 258.0 110 19.44      a
+Hornet Sportabout   18.7 360.0 175 17.02      a
+Valiant             18.1 225.0 105 20.22      a
+Duster 360          14.3 360.0 245 15.84      a
+Merc 240D           24.4 146.7  62 20.00      a
+Merc 230            22.8 140.8  95 22.90      a
+Merc 280            19.2 167.6 123 18.30      a
+Merc 280C           17.8 167.6 123 18.90      a
+Merc 450SE          16.4 275.8 180 17.40      a
+Merc 450SL          17.3 275.8 180 17.60      a
+Merc 450SLC         15.2 275.8 180 18.00      a
+Cadillac Fleetwood  10.4 472.0 205 17.98      a
+Lincoln Continental 10.4 460.0 215 17.82      a
+Chrysler Imperial   14.7 440.0 230 17.42      a
+Fiat 128            32.4  78.7  66 19.47      a
+Honda Civic         30.4  75.7  52 18.52      a
+Toyota Corolla      33.9  71.1  65 19.90      a
+Toyota Corona       21.5 120.1  97 20.01      a
+Dodge Challenger    15.5 318.0 150 16.87      a
+AMC Javelin         15.2 304.0 150 17.30      a
+Camaro Z28          13.3 350.0 245 15.41      a
+Pontiac Firebird    19.2 400.0 175 17.05      a
+Fiat X1-9           27.3  79.0  66 18.90      a
+Porsche 914-2       26.0 120.3  91 16.70      a
+Lotus Europa        30.4  95.1 113 16.90      a
+Ford Pantera L      15.8 351.0 264 14.50      a
+Ferrari Dino        19.7 145.0 175 15.50      a
+Maserati Bora       15.0 301.0 335 14.60      a
+Volvo 142E          21.4 121.0 109 18.60      a</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(<span class="cf">function</span>(x){</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(<span class="fu">is.numeric</span>(x)){</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>(x) <span class="sc">&gt;</span> <span class="dv">10</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>      }<span class="cf">else</span>{</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">is.character</span>(x) <span class="co"># must return true or false</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg  disp  hp  qsec string
+Mazda RX4           21.0 160.0 110 16.46      a
+Mazda RX4 Wag       21.0 160.0 110 17.02      a
+Datsun 710          22.8 108.0  93 18.61      a
+Hornet 4 Drive      21.4 258.0 110 19.44      a
+Hornet Sportabout   18.7 360.0 175 17.02      a
+Valiant             18.1 225.0 105 20.22      a
+Duster 360          14.3 360.0 245 15.84      a
+Merc 240D           24.4 146.7  62 20.00      a
+Merc 230            22.8 140.8  95 22.90      a
+Merc 280            19.2 167.6 123 18.30      a
+Merc 280C           17.8 167.6 123 18.90      a
+Merc 450SE          16.4 275.8 180 17.40      a
+Merc 450SL          17.3 275.8 180 17.60      a
+Merc 450SLC         15.2 275.8 180 18.00      a
+Cadillac Fleetwood  10.4 472.0 205 17.98      a
+Lincoln Continental 10.4 460.0 215 17.82      a
+Chrysler Imperial   14.7 440.0 230 17.42      a
+Fiat 128            32.4  78.7  66 19.47      a
+Honda Civic         30.4  75.7  52 18.52      a
+Toyota Corolla      33.9  71.1  65 19.90      a
+Toyota Corona       21.5 120.1  97 20.01      a
+Dodge Challenger    15.5 318.0 150 16.87      a
+AMC Javelin         15.2 304.0 150 17.30      a
+Camaro Z28          13.3 350.0 245 15.41      a
+Pontiac Firebird    19.2 400.0 175 17.05      a
+Fiat X1-9           27.3  79.0  66 18.90      a
+Porsche 914-2       26.0 120.3  91 16.70      a
+Lotus Europa        30.4  95.1 113 16.90      a
+Ford Pantera L      15.8 351.0 264 14.50      a
+Ferrari Dino        19.7 145.0 175 15.50      a
+Maserati Bora       15.0 301.0 335 14.60      a
+Volvo 142E          21.4 121.0 109 18.60      a</code></pre>
+</div>
 </div>
 </section>
 <section id="select-columns-if-the-first-value-in-the-column-is" class="level3" data-number="4.3.4">
 <h3 data-number="4.3.4" class="anchored" data-anchor-id="select-columns-if-the-first-value-in-the-column-is"><span class="header-section-number">4.3.4</span> Select Columns if the first value in the column is …</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">function</span>(x)x[[<span class="dv">1</span>]] <span class="sc">==</span> <span class="st">"a"</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>      <span class="cf">function</span>(x)x[[<span class="dv">1</span>]] <span class="sc">==</span> <span class="st">"a"</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    string
 Mazda RX4                a
@@ -661,16 +600,92 @@ Volvo 142E               a</code></pre>
 </div>
 </section>
 </section>
-<section id="filtering-rows" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="filtering-rows"><span class="header-section-number">4.4</span> Filtering Rows</h2>
-</section>
-<section id="rowwise-compute-new-column-with-subset-of-existing-columns" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="rowwise-compute-new-column-with-subset-of-existing-columns"><span class="header-section-number">4.5</span> Rowwise Compute new Column with subset of existing columns</h2>
+<section id="where-vs-normal-tidy-select" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="where-vs-normal-tidy-select"><span class="header-section-number">4.4</span> where vs “normal” tidy select</h2>
+<p>The docs say about where:</p>
+<blockquote class="blockquote">
+<p>where(): Applies a function to all variables and selects those for which the function returns TRUE.</p>
+</blockquote>
+<p>So it essentially loops over the columns like lapply, whereas a code like this using the selection helpers only looks at the names of the variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">med =</span> <span class="fu">pmap_dbl</span>(<span class="fu">select</span>(., <span class="fu">where</span>(is.numeric)), <span class="sc">~</span><span class="fu">median</span>(<span class="fu">c</span>(...), <span class="at">na.rm =</span> T))</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  )  <span class="sc">%&gt;%</span> glimpse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">"^d"</span>)) <span class="sc">%&gt;%</span> head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  disp drat
+Mazda RX4          160 3.90
+Mazda RX4 Wag      160 3.90
+Datsun 710         108 3.85
+Hornet 4 Drive     258 3.08
+Hornet Sportabout  360 3.15
+Valiant            225 2.76</code></pre>
+</div>
+</div>
+<p>This works because the “normal” select also takes indexes and by looping over the columns with <code>map_dbl</code> and checking which mean &gt; 10 returns 1 we get the indexes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">which</span>(<span class="fu">map_dbl</span>(.,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                                <span class="sc">~</span> <span class="fu">mean</span>(.x <span class="sc">&gt;</span> <span class="dv">10</span>)) <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              mpg disp  hp  qsec string
+Mazda RX4      21  160 110 16.46      a
+Mazda RX4 Wag  21  160 110 17.02      a</code></pre>
+</div>
+</div>
+<p>The same with <code>where</code> just that we need to take care of the string column as the function would return <code>NA</code> and that cant be used as index..</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span><span class="fu">mean</span>(.x) <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">mean</span>(.x))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in mean.default(.x): argument is not numeric or logical: returning NA
+
+Warning in mean.default(.x): argument is not numeric or logical: returning NA</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg  disp  hp  qsec
+Mazda RX4           21.0 160.0 110 16.46
+Mazda RX4 Wag       21.0 160.0 110 17.02
+Datsun 710          22.8 108.0  93 18.61
+Hornet 4 Drive      21.4 258.0 110 19.44
+Hornet Sportabout   18.7 360.0 175 17.02
+Valiant             18.1 225.0 105 20.22
+Duster 360          14.3 360.0 245 15.84
+Merc 240D           24.4 146.7  62 20.00
+Merc 230            22.8 140.8  95 22.90
+Merc 280            19.2 167.6 123 18.30
+Merc 280C           17.8 167.6 123 18.90
+Merc 450SE          16.4 275.8 180 17.40
+Merc 450SL          17.3 275.8 180 17.60
+Merc 450SLC         15.2 275.8 180 18.00
+Cadillac Fleetwood  10.4 472.0 205 17.98
+Lincoln Continental 10.4 460.0 215 17.82
+Chrysler Imperial   14.7 440.0 230 17.42
+Fiat 128            32.4  78.7  66 19.47
+Honda Civic         30.4  75.7  52 18.52
+Toyota Corolla      33.9  71.1  65 19.90
+Toyota Corona       21.5 120.1  97 20.01
+Dodge Challenger    15.5 318.0 150 16.87
+AMC Javelin         15.2 304.0 150 17.30
+Camaro Z28          13.3 350.0 245 15.41
+Pontiac Firebird    19.2 400.0 175 17.05
+Fiat X1-9           27.3  79.0  66 18.90
+Porsche 914-2       26.0 120.3  91 16.70
+Lotus Europa        30.4  95.1 113 16.90
+Ford Pantera L      15.8 351.0 264 14.50
+Ferrari Dino        19.7 145.0 175 15.50
+Maserati Bora       15.0 301.0 335 14.60
+Volvo 142E          21.4 121.0 109 18.60</code></pre>
+</div>
+</div>
+</section>
+<section id="filtering-rows" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="filtering-rows"><span class="header-section-number">4.5</span> Filtering Rows</h2>
+</section>
+<section id="rowwise-compute-new-column-with-subset-of-existing-columns" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="rowwise-compute-new-column-with-subset-of-existing-columns"><span class="header-section-number">4.6</span> Rowwise Compute new Column with subset of existing columns</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">med =</span> <span class="fu">pmap_dbl</span>(<span class="fu">select</span>(., <span class="fu">where</span>(is.numeric)), <span class="sc">~</span><span class="fu">median</span>(<span class="fu">c</span>(...), <span class="at">na.rm =</span> T))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  )  <span class="sc">%&gt;%</span> glimpse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 32
 Columns: 13
@@ -690,8 +705,8 @@ $ med    &lt;dbl&gt; 4.000, 4.000, 4.000, 3.215, 3.440, 3.460, 4.000, 4.000, 4.0
 </div>
 </div>
 </section>
-<section id="adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group"><span class="header-section-number">4.6</span> Adding column indicating if group if max value in group is in top-n max values per group</h2>
+<section id="adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="adding-column-indicating-if-group-if-max-value-in-group-is-in-top-n-max-values-per-group"><span class="header-section-number">4.7</span> Adding column indicating if group if max value in group is in top-n max values per group</h2>
 <p><strong>Steps: </strong></p>
 <ol type="1">
 <li><p><code>group_by</code> the grouping variable</p></li>
@@ -699,63 +714,63 @@ $ med    &lt;dbl&gt; 4.000, 4.000, 4.000, 3.215, 3.440, 3.460, 4.000, 4.000, 4.0
 <li><p><code>inneer_join</code> the result with the original data-frame</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># which of the cyl-groups  contains the two highest disp</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>top12 <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">max</span>(disp)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(m)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top2 =</span> <span class="fu">if_else</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), T, F)) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    ., mtcars, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"cyl"</span>)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># which of the cyl-groups  contains the two highest disp</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>top12 <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">max</span>(disp)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(m)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top2 =</span> <span class="fu">if_else</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), T, F)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    ., mtcars, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"cyl"</span>)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="example-of-stackoverflow" class="level5" data-number="4.6.0.0.1">
-<h5 data-number="4.6.0.0.1" class="anchored" data-anchor-id="example-of-stackoverflow"><span class="header-section-number">4.6.0.0.1</span> example of STACKOVERFLOW</h5>
+<section id="example-of-stackoverflow" class="level5" data-number="4.7.0.0.1">
+<h5 data-number="4.7.0.0.1" class="anchored" data-anchor-id="example-of-stackoverflow"><span class="header-section-number">4.7.0.0.1</span> example of STACKOVERFLOW</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>), <span class="at">year =</span> <span class="fu">c</span>(<span class="st">"2017"</span>, <span class="st">"2018"</span>, </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, </span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, </span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, </span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, </span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, </span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, </span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>), <span class="at">volume =</span> <span class="fu">c</span>(<span class="fl">0.0013</span>, <span class="fl">0.0013</span>, <span class="fl">0.0012579</span>, <span class="fl">0.0011895</span>, <span class="fl">0.0011421</span>, </span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0010842</span>, <span class="fl">0.0010211</span>, <span class="fl">0.0010158</span>, <span class="fl">0.00099474</span>, <span class="fl">0.00092632</span>, <span class="fl">0.07878</span>, </span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fl">0.078791</span>, <span class="fl">0.077295</span>, <span class="fl">0.076638</span>, <span class="fl">0.075538</span>, <span class="fl">0.074468</span>, <span class="fl">0.074776</span>, <span class="fl">0.074051</span>, </span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="fl">0.071706</span>, <span class="fl">0.068056</span>, <span class="fl">0.023269</span>, <span class="fl">0.023011</span>, <span class="fl">0.022374</span>, <span class="fl">0.021962</span>, <span class="fl">0.021408</span>, </span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="fl">0.020949</span>, <span class="fl">0.020811</span>, <span class="fl">0.020354</span>, <span class="fl">0.019309</span>, <span class="fl">0.018042</span>, <span class="fl">0.0004</span>, <span class="fl">0.0004</span>, </span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="fl">0.00038421</span>, <span class="fl">0.00035263</span>, <span class="fl">0.00033158</span>, <span class="fl">0.00032105</span>, <span class="fl">0.00026842</span>, <span class="fl">0.00028421</span>, </span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="fl">0.00026842</span>, <span class="fl">0.00024211</span>, <span class="fl">0.0002</span>, <span class="fl">0.0001</span>, <span class="fl">0.00011579</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, </span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.028422</span>, <span class="fl">0.028361</span>, <span class="fl">0.027768</span>, <span class="fl">0.027501</span>, <span class="fl">0.027029</span>, </span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="fl">0.02651</span>, <span class="fl">0.026588</span>, <span class="fl">0.026209</span>, <span class="fl">0.025094</span>, <span class="fl">0.023391</span>, <span class="fl">0.0001</span>, <span class="fl">0.0001</span>, </span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.0047</span>, <span class="fl">0.0047158</span>, <span class="fl">0.0048368</span>, <span class="fl">0.0048316</span>, </span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0049263</span>, <span class="fl">0.0049737</span>, <span class="fl">0.0049947</span>, <span class="fl">0.0051684</span>, <span class="fl">0.0052526</span>, <span class="fl">0.0051842</span>, </span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0106</span>, <span class="fl">0.010389</span>, <span class="fl">0.010279</span>, <span class="fl">0.010005</span>, <span class="fl">0.0098421</span>, <span class="fl">0.0096368</span>, <span class="fl">0.0094053</span>, </span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0093368</span>, <span class="fl">0.0092526</span>, <span class="fl">0.0089316</span>)), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"tbl_df"</span>, <span class="st">"tbl"</span>, </span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a><span class="st">"data.frame"</span>), <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="sc">-</span>90L))</span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
-<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">max</span>(volume)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(m)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top3 =</span> <span class="fu">if_else</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), T, F)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(., df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span>)) <span class="ot">-&gt;</span> top123</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>), <span class="at">year =</span> <span class="fu">c</span>(<span class="st">"2017"</span>, <span class="st">"2018"</span>, </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, </span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, </span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, </span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, </span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, <span class="st">"2019"</span>, <span class="st">"2020"</span>, </span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span>, <span class="st">"2017"</span>, <span class="st">"2018"</span>, </span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="st">"2019"</span>, <span class="st">"2020"</span>, <span class="st">"2021"</span>, <span class="st">"2022"</span>, <span class="st">"2023"</span>, <span class="st">"2024"</span>, <span class="st">"2025"</span>, <span class="st">"2026"</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>), <span class="at">volume =</span> <span class="fu">c</span>(<span class="fl">0.0013</span>, <span class="fl">0.0013</span>, <span class="fl">0.0012579</span>, <span class="fl">0.0011895</span>, <span class="fl">0.0011421</span>, </span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0010842</span>, <span class="fl">0.0010211</span>, <span class="fl">0.0010158</span>, <span class="fl">0.00099474</span>, <span class="fl">0.00092632</span>, <span class="fl">0.07878</span>, </span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="fl">0.078791</span>, <span class="fl">0.077295</span>, <span class="fl">0.076638</span>, <span class="fl">0.075538</span>, <span class="fl">0.074468</span>, <span class="fl">0.074776</span>, <span class="fl">0.074051</span>, </span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="fl">0.071706</span>, <span class="fl">0.068056</span>, <span class="fl">0.023269</span>, <span class="fl">0.023011</span>, <span class="fl">0.022374</span>, <span class="fl">0.021962</span>, <span class="fl">0.021408</span>, </span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="fl">0.020949</span>, <span class="fl">0.020811</span>, <span class="fl">0.020354</span>, <span class="fl">0.019309</span>, <span class="fl">0.018042</span>, <span class="fl">0.0004</span>, <span class="fl">0.0004</span>, </span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="fl">0.00038421</span>, <span class="fl">0.00035263</span>, <span class="fl">0.00033158</span>, <span class="fl">0.00032105</span>, <span class="fl">0.00026842</span>, <span class="fl">0.00028421</span>, </span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="fl">0.00026842</span>, <span class="fl">0.00024211</span>, <span class="fl">0.0002</span>, <span class="fl">0.0001</span>, <span class="fl">0.00011579</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, </span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.028422</span>, <span class="fl">0.028361</span>, <span class="fl">0.027768</span>, <span class="fl">0.027501</span>, <span class="fl">0.027029</span>, </span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="fl">0.02651</span>, <span class="fl">0.026588</span>, <span class="fl">0.026209</span>, <span class="fl">0.025094</span>, <span class="fl">0.023391</span>, <span class="fl">0.0001</span>, <span class="fl">0.0001</span>, </span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.0047</span>, <span class="fl">0.0047158</span>, <span class="fl">0.0048368</span>, <span class="fl">0.0048316</span>, </span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0049263</span>, <span class="fl">0.0049737</span>, <span class="fl">0.0049947</span>, <span class="fl">0.0051684</span>, <span class="fl">0.0052526</span>, <span class="fl">0.0051842</span>, </span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0106</span>, <span class="fl">0.010389</span>, <span class="fl">0.010279</span>, <span class="fl">0.010005</span>, <span class="fl">0.0098421</span>, <span class="fl">0.0096368</span>, <span class="fl">0.0094053</span>, </span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0093368</span>, <span class="fl">0.0092526</span>, <span class="fl">0.0089316</span>)), <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"tbl_df"</span>, <span class="st">"tbl"</span>, </span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a><span class="st">"data.frame"</span>), <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="sc">-</span>90L))</span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">max</span>(volume)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(m)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">top3 =</span> <span class="fu">if_else</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), T, F)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(., df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span>)) <span class="ot">-&gt;</span> top123</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="list-columns-and-dplyr" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="list-columns-and-dplyr"><span class="header-section-number">4.7</span> list Columns (and <code>dplyr</code>)</h2>
+<section id="list-columns-and-dplyr" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="list-columns-and-dplyr"><span class="header-section-number">4.8</span> list Columns (and <code>dplyr</code>)</h2>
 <div class="cell">
 
 </div>
@@ -763,10 +778,10 @@ $ med    &lt;dbl&gt; 4.000, 4.000, 4.000, 3.215, 3.440, 3.460, 4.000, 4.000, 4.0
 <li>tibbles and dataframes are lists of vectors!!</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">=</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">10</span>),</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">=</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">10</span>),</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "list"</code></pre>
 </div>
@@ -779,8 +794,8 @@ $ med    &lt;dbl&gt; 4.000, 4.000, 4.000, 3.215, 3.440, 3.460, 4.000, 4.000, 4.0
 <ul>
 <li>List columns are much more versatile than atomic vectors. They can contain atomic vectors, other lists, tibbles, …</li>
 </ul>
-<section id="creating-list-columns" class="level3" data-number="4.7.1">
-<h3 data-number="4.7.1" class="anchored" data-anchor-id="creating-list-columns"><span class="header-section-number">4.7.1</span> Creating List Columns</h3>
+<section id="creating-list-columns" class="level3" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="creating-list-columns"><span class="header-section-number">4.8.1</span> Creating List Columns</h3>
 <ul>
 <li><p>It seems to be common to create list columns by modifying an existing “normal” tibble. Three common ways are:</p>
 <ul>
@@ -789,21 +804,21 @@ $ med    &lt;dbl&gt; 4.000, 4.000, 4.000, 3.215, 3.440, 3.460, 4.000, 4.000, 4.0
 <li><code>mutate</code> and <code>map</code></li>
 </ul></li>
 </ul>
-<section id="nest" class="level4" data-number="4.7.1.1">
-<h4 data-number="4.7.1.1" class="anchored" data-anchor-id="nest"><span class="header-section-number">4.7.1.1</span> <code>nest()</code></h4>
+<section id="nest" class="level4" data-number="4.8.1.1">
+<h4 data-number="4.8.1.1" class="anchored" data-anchor-id="nest"><span class="header-section-number">4.8.1.1</span> <code>nest()</code></h4>
 <ul>
 <li><p>When calling <code>nest</code> the first argument is the new column-name. In this case it is <code>cars</code>.</p></li>
 <li><p>The second argument are the columns you want to have in the resulting dataframe in each element of the list column.</p></li>
 <li><p>Each column you do not specify automatically becomes a <em>grouping variable</em> and all the resulting tibble will have as many rows as unique combinations in these <em>grouping variables</em> there are.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mtcars_with_list_col <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(cyl, mpg, name) <span class="sc">%&gt;%</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">cars =</span> <span class="fu">c</span>(mpg, name))</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect it</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars_with_list_col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mtcars_with_list_col <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(cyl, mpg, name) <span class="sc">%&gt;%</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">cars =</span> <span class="fu">c</span>(mpg, name))</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect it</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars_with_list_col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [3 × 2] (S3: tbl_df/tbl/data.frame)
  $ cyl : num [1:3] 6 4 8
@@ -820,90 +835,90 @@ $ med    &lt;dbl&gt; 4.000, 4.000, 4.000, 3.215, 3.440, 3.460, 4.000, 4.000, 4.0
 </div>
 </div>
 </section>
-<section id="summarise-and-list" class="level4" data-number="4.7.1.2">
-<h4 data-number="4.7.1.2" class="anchored" data-anchor-id="summarise-and-list"><span class="header-section-number">4.7.1.2</span> <code>summarise</code> and <code>list</code></h4>
+<section id="summarise-and-list" class="level4" data-number="4.8.1.2">
+<h4 data-number="4.8.1.2" class="anchored" data-anchor-id="summarise-and-list"><span class="header-section-number">4.8.1.2</span> <code>summarise</code> and <code>list</code></h4>
 <ul>
 <li><p>Normally you use <code>group_by</code> and <code>summarise</code> to collapse groups into single rows.</p></li>
 <li><p>You can also use <code>group_by</code>, <code>summarise</code> and <code>list</code> to create atomic vectors where each vector corresponds to one group of <code>cyl</code></p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mtcars_names_per_cyl <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cars_per_cyl =</span> <span class="fu">list</span>(name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mtcars_names_per_cyl <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cars_per_cyl =</span> <span class="fu">list</span>(name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>What if you want to manipulate each vector before putting it into the list column</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mtcars_names_per_cyl_sorted <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cars_per_cyl =</span> <span class="fu">list</span>(<span class="fu">sort</span>(name)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mtcars_names_per_cyl_sorted <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cars_per_cyl =</span> <span class="fu">list</span>(<span class="fu">sort</span>(name)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="mutate-and-map" class="level4" data-number="4.7.1.3">
-<h4 data-number="4.7.1.3" class="anchored" data-anchor-id="mutate-and-map"><span class="header-section-number">4.7.1.3</span> <code>mutate</code> and <code>map</code></h4>
+<section id="mutate-and-map" class="level4" data-number="4.8.1.3">
+<h4 data-number="4.8.1.3" class="anchored" data-anchor-id="mutate-and-map"><span class="header-section-number">4.8.1.3</span> <code>mutate</code> and <code>map</code></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>n_values_per_car_letter <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">random =</span> <span class="fu">map</span>(name, <span class="sc">~</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">str_length</span>(.x)))) <span class="sc">%&gt;%</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, random)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(n_values_per_car_letter)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>n_values_per_car_letter <span class="ot">=</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">random =</span> <span class="fu">map</span>(name, <span class="sc">~</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">str_length</span>(.x)))) <span class="sc">%&gt;%</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, random)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(n_values_per_car_letter)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   32 obs. of  2 variables:
  $ name  : chr  "Mazda RX4" "Mazda RX4 Wag" "Datsun 710" "Hornet 4 Drive" ...
  $ random:List of 32
-  ..$ : num  -1.39 -0.172 -1.586 -0.906 0.519 ...
-  ..$ : num  0.286 -0.349 -1.138 -1.218 2.32 ...
-  ..$ : num  -1.06 1.277 0.205 -0.241 1.212 ...
-  ..$ : num  -0.259 0.434 0.996 -1.991 0.137 ...
-  ..$ : num  -0.35 -1.933 -0.954 -1.247 -1.087 ...
-  ..$ : num  -0.0315 1.7732 -0.8871 -0.058 1.2141 ...
-  ..$ : num  0.163 0.114 0.629 -0.83 1.429 ...
-  ..$ : num  0.10468 -0.75515 0.00415 -0.31361 -0.10037 ...
-  ..$ : num  -0.45 -0.499 0.628 -0.749 -0.707 ...
-  ..$ : num  1.2509 1.858 0.0734 -1.8161 0.0379 ...
-  ..$ : num  0.214 0.397 0.35 0.261 -0.655 ...
-  ..$ : num  -0.981 -2.152 -1.666 0.74 -0.371 ...
-  ..$ : num  0.0353 -0.7609 -0.1759 1.0431 -0.0614 ...
-  ..$ : num  1.2423 0.1497 -0.0635 -0.4431 -0.1211 ...
-  ..$ : num  0.473 -0.914 0.157 -0.364 -0.661 ...
-  ..$ : num  1.9974 -0.9301 0.0119 0.5891 0.757 ...
-  ..$ : num  0.778 -1.139 -2.08 4.09 -0.723 ...
-  ..$ : num  -0.631 1.074 -0.659 1.106 -0.314 ...
-  ..$ : num  0.558 -0.919 0.876 0.872 -0.569 ...
-  ..$ : num  0.456 -0.945 -0.76 1.374 0.156 ...
-  ..$ : num  1.108 -0.268 0.376 0.475 0.856 ...
-  ..$ : num  0.131 2.073 -0.107 -1.153 1.87 ...
-  ..$ : num  -0.765 -0.158 0.405 -1.298 -0.528 ...
-  ..$ : num  -0.789 1.717 0.346 0.485 -0.738 ...
-  ..$ : num  -0.0769 0.1639 0.8181 -0.7513 -0.6578 ...
-  ..$ : num  -1.04 -0.104 0.166 -0.305 -1.029 ...
-  ..$ : num  -0.534 0.299 0.382 1.147 -1.831 ...
-  ..$ : num  -0.465 -1.207 -0.862 2.451 -0.239 ...
-  ..$ : num  1.33 -1.133 -0.257 -0.395 1.039 ...
-  ..$ : num  -0.559 1.206 0.275 1.252 0.152 ...
-  ..$ : num  0.927 -0.947 -1.316 -0.632 0.375 ...
-  ..$ : num  0.0327 -0.9369 1.44 -0.328 -0.0424 ...</code></pre>
+  ..$ : num  -0.642 -0.739 2.134 0.698 -0.556 ...
+  ..$ : num  -1.22 -2.038 -0.266 0.208 -0.292 ...
+  ..$ : num  1.339 -0.748 0.501 -0.447 -0.187 ...
+  ..$ : num  1.5916 -0.2437 0.2315 -0.0341 1.2387 ...
+  ..$ : num  -0.64 0.461 -1.438 0.364 -0.967 ...
+  ..$ : num  -1.496 -1.173 -1.198 -0.879 -1.868 ...
+  ..$ : num  0.0964 -1.9081 -0.9482 0.4722 2.5126 ...
+  ..$ : num  -0.122 -1.128 0.777 -0.975 -0.555 ...
+  ..$ : num  1.065 0.423 -0.5229 0.3957 -0.0766 ...
+  ..$ : num  0.191 -0.295 1.835 -0.616 -0.135 ...
+  ..$ : num  1.045 -1.151 -0.366 1.159 0.394 ...
+  ..$ : num  -0.687 -0.682 2.323 -0.518 -0.674 ...
+  ..$ : num  0.8023 0.3583 -0.0716 2.1396 -0.3264 ...
+  ..$ : num  -1.223 1.028 0.371 -0.235 0.895 ...
+  ..$ : num  0.00585 -1.33862 0.2603 1.07641 1.61986 ...
+  ..$ : num  0.437 0.193 0.831 1.086 -1.162 ...
+  ..$ : num  -0.513 1.174 -0.445 0.644 -0.127 ...
+  ..$ : num  -0.115 -0.218 -0.43 -0.107 0.904 ...
+  ..$ : num  -0.438 -0.88 -1.489 0.761 1.325 ...
+  ..$ : num  1.219 -2.165 -0.317 0.293 -1.136 ...
+  ..$ : num  1.352 -0.469 -0.452 1.102 -0.776 ...
+  ..$ : num  -0.727 -1.243 -0.689 -0.369 -1.01 ...
+  ..$ : num  -0.374 0.0611 -0.3538 0.0774 -1.7302 ...
+  ..$ : num  -2.207 -0.554 -0.893 -0.396 -0.929 ...
+  ..$ : num  0.287 -0.679 0.354 -0.609 -0.728 ...
+  ..$ : num  -0.5951 0.3829 -0.4521 -0.2426 0.0218 ...
+  ..$ : num  1.725 0.524 -0.215 -0.174 1.596 ...
+  ..$ : num  -1.014 -0.467 0.337 -0.525 0.627 ...
+  ..$ : num  -1.222 -1.355 -1.235 -1.176 -0.391 ...
+  ..$ : num  -0.372 -0.582 -0.618 -0.817 -0.732 ...
+  ..$ : num  0.169 -1.743 -1.636 -1.266 1.323 ...
+  ..$ : num  -0.4026 1.1224 -0.6889 -2.19 -0.0613 ...</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="manipulating" class="level3" data-number="4.7.2">
-<h3 data-number="4.7.2" class="anchored" data-anchor-id="manipulating"><span class="header-section-number">4.7.2</span> Manipulating</h3>
+<section id="manipulating" class="level3" data-number="4.8.2">
+<h3 data-number="4.8.2" class="anchored" data-anchor-id="manipulating"><span class="header-section-number">4.8.2</span> Manipulating</h3>
 <ul>
 <li>say you want to get the number of rows for each data.frame in a list column</li>
 </ul>
 <p><strong>Version 1</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">data_per_cyl =</span> <span class="sc">!</span>cyl) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow_per_cyl =</span> <span class="fu">map_dbl</span>(data_per_cyl, nrow)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">data_per_cyl =</span> <span class="sc">!</span>cyl) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow_per_cyl =</span> <span class="fu">map_dbl</span>(data_per_cyl, nrow)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
     cyl data_per_cyl       nrow_per_cyl
@@ -918,13 +933,13 @@ $ med    &lt;dbl&gt; 4.000, 4.000, 4.000, 3.215, 3.440, 3.460, 4.000, 4.000, 4.0
 <li>usig <code>rowwise</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">data_per_cyl =</span> <span class="sc">!</span>cyl) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow_per_cyl =</span> <span class="fu">nrow</span>(data_per_cyl)</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">rownames</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="at">data_per_cyl =</span> <span class="sc">!</span>cyl) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow_per_cyl =</span> <span class="fu">nrow</span>(data_per_cyl)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
 # Rowwise: 
