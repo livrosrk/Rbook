@@ -13,6 +13,7 @@ library(magrittr)
 
 - In the end you always want a boolean vector  that has the length of the number of columns
 
+
 ## Selecting columns
 
 ### Selecting columns based on regex
@@ -75,7 +76,6 @@ mtcars_copy[, apply(mtcars_copy, 2, function(x) sum(is.na(x)) == 0)]
 
 # using any
 mtcars_copy[, apply(mtcars_copy, 2, function(x) !any(is.na(x)))]
-
 ```
 
 ### Selecting Columns if the mean is > ...
@@ -347,7 +347,6 @@ mtcars %>%
 
 
 ```{r}
-
 mtcars %>%
   mutate(name = rownames(.)) %>%
   nest(data_per_cyl = !cyl) %>% 

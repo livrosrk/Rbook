@@ -15,6 +15,7 @@ book:
     - dplyr.qmd
     - mapping.qmd
     - ggplot.qmd
+    - sf.qmd
 
 format:
   html:

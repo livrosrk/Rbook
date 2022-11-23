@@ -1,0 +1,33 @@
+# Attributes
+
+- Any type of object (be it atomic vectors or lists) can have attributes to store metadata
+
+- They are like a named list
+
+- Attributes can be accessed individually with `attr()` or all at once with `attributes()`. 
+
+- Most attributes are lost on modification. Only the `names`-attribute, the `dimensions` and the `class` (important for S3 classes) attribute are kept
+
+- Each of these attributes has a specific accessor function, rather than `attr(x, "names")` you write `names(x)` or `class(x)` 
+## Set and get a single attribute
+
+```{r}
+y <- 1:10
+attr(y, "my_attribute") <- "This is a vector" # set the attribute
+attr(y, "my_second_attribute") <- "This is still a vector" 
+attr(y, "my_attribute")
+```
+
+## Get all attributes
+
+```{r}
+attributes(y)
+```
+
+
+## Use structure to create an object with attributes directly
+
+```{r}
+ll = structure(list(a=1,b=2), fistAttribute = "first", secondAttribute="second")
+```
+

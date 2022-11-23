@@ -12,6 +12,20 @@
 
 #### Lists
 
+- Lists are different from atomic vectors as they their elements can be of any type, even other lists
+
+- While vectors are created with `c()`, lists can be created with `list()`
+
+- `c()` will combine multiple lists into one
+
+```{r}
+
+l1 = list(a = 1, b=c(1,2,3))
+l2 = list(c=3, d=c(4,5,6))
+lCombined = c(l1,l2)
+```
+
+
 ## 2D
 
 ### Homogenoues
