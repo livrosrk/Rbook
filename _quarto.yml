@@ -3,23 +3,23 @@ project:
   output-dir: docs
 
 book:
-  title: "livror"
+  title: "Make my life easy with R"
   author: "Robin Kohrs"
   date: "9/07/2022"
-  toc: true
-  toc-depth: 3
   chapters:
     - index.qmd
-    - intro.qmd
     - datatypes.qmd
     - dplyr.qmd
-    - mapping.qmd
     - ggplot.qmd
     - sf.qmd
+    - stars.qmd
 
 format:
   html:
     theme: cosmo
+    toc: true
+    toc-depth: 4
+    code-fold: true
   pdf:
     documentclass: scrreprt
 

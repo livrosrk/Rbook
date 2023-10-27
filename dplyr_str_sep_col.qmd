@@ -1,0 +1,44 @@
+# Separate columns with multiple strings separated by some delimiter
+
+```{r message=F}
+library(tidyverse)
+library(magrittr)
+```
+
+```{r}
+data =  read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv')
+```
+
+## Separate the genre_names column and make the dataset longer
+
+Currently the data has that many rows:
+
+```{r}
+nrow(data)
+```
+I want to get each genre from the `genre_names` column wich is separated by a comma and create a new row for each
+
+```{r}
+data$genre_names %>% head
+```
+
+Now the data has much more rows. One for each separated genre
+```{r}
+data %>% 
+  separate_longer_delim(genre_names, delim=", ") %>% 
+  glimpse()
+```
+## Count the number of genres per moview
+```{r}
+data %>% 
+  mutate(
+    n_genres = lengths(str_split(genre_names, ", ")),
+    n_genres2 = map_dbl(genre_names, ~str_split(.x, ", ") %>% lengths)
+  ) %>% glimpse
+```
+
+
+
+
+
+

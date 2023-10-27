@@ -4,21 +4,46 @@
 library(sf)
 library(terra)
 library(dplyr)
+library(tidyverse)
 library(spData)
 library(tmap)
+library(here)
+library(bench)
+library(geos)
 ```
 
-## Data
 
 ```{r}
 elev = rast(system.file("raster/elev.tif", package = "spData"))
 grain = rast(system.file("raster/grain.tif", package = "spData"))
 ```
 
+## SF
 
-### Vector data Opperations
+- read here: https://r-spatial.org/book/07-Introsf.html
 
-#### Spatial Subsetting
+> What attributes does an sf-object have?
+
+- name of the geometry column in an attribute called `sf_column`
+
+- for each non-geometry variable, the attribute-geometry relationship. What is that? read here: https://r-spatial.org/book/05-Attributes.html#exercises
+
+```{r}
+attributes(canterbury)
+```
+
+> What attributes does a sfc-geometry list-column have?
+
+```{r}
+attributes(canterbury$geom)
+```
+
+
+
+
+## Vector data Opperations
+
+### Spatial Subsetting
 
 - Taking a spatial object and returning only features that relate in space to another object 
 
@@ -45,4 +70,142 @@ p_hpnz2 = tm_shape(nz) + tm_polygons(col = "white") +
 tmap_arrange(p_hpnz1, p_hpnz2, ncol = 2)
 ```
 
-## Conversion between spatial formats
+
+### Clipping, intersecting,...
+
+- Lets imagine we have a two polygons
+
+- The very big, non-simppified 2115 gemeinden of Austria, and a 50km Grid overlaid
+
+- Now we can ask many qustions!
+
+```{r}
+path_gemeinden_2023 = here("data/geodata/gems_oe_31287.fgb")
+gems = read_sf(path_gemeinden_2023)
+grid = st_make_grid(gems, cellsize = 50000) %>% st_sf()
+oe = read_sf(here("data/geodata/oe_outline_31287.fgb"))
+plot(grid)
+plot(gems[0], add=T, border="red")
+```
+
+
+<div style="font-size: 2rem">How many Gemeinden intersect with each grid cell?</div>
+
+
+
+```{r polygons_intersecting_polygons}
+
+stIntersects = function(a, b){
+  is =st_intersects(a,b) 
+  ls = lengths(is)
+  a[["n_intersections"]] = ls
+  return(a)
+}
+
+
+stIntersectsDplyr = function(a, b){
+  a = a %>% 
+    mutate(
+      n_intersections = lengths(st_intersects(., b))
+    )
+  return(a)
+}
+
+b = bench::mark(
+  noDplyr = stIntersects(grid, gems),
+  dplyr = stIntersectsDplyr(grid, gems)
+)
+
+res = stIntersects(grid, gems)
+ggplot() +
+  geom_sf(data =res, aes(fill=n_intersections), show.legend = F) +
+  geom_sf(data =oe, fill=NA, color="pink", linewidth=1) +
+  geom_sf_text(data=res, aes(label=n_intersections), color="white") +
+  labs(
+    x =NULL,
+    y =NULL
+  ) + theme_void()
+```
+
+> GEOS
+
+<div style="font-size: 2rem">Doing the same in geos</div>
+
+```{r}
+geosIntersect = function(a, b){
+  a_geos = as_geos_geometry(a)
+  b_stre = as_geos_strtree(b)
+  n_intersections = lengths(geos_intersects_matrix(a_geos, b_stre))
+  a[["n_intersections"]]   = n_intersections
+  return(a)
+}
+
+compare_sf_geos = bench::mark(
+  check = T,
+  sf = stIntersects(grid, gems),
+  geos = geosIntersect(grid, gems)
+)
+
+compare_sf_geos
+```
+
+<div style="font-size: 2rem">How big is the share of each gemeinde that it lies within each grid cell</div>
+
+
+```{r}
+areaNoDplyr = function(a){
+  a[["area"]] = st_area(a)
+  return(a)
+}
+
+areaDplyr = function(a){
+  a = a %>% 
+    mutate(
+      area = st_area(.)
+    )
+  return(a)
+}
+
+b_area = bench::mark(
+  dplyr = areaDplyr(gems),
+  no_dplyr = areaNoDplyr(gems)
+)
+
+areaIntersection = function(a, b){
+  # get area for b
+  b = b %>% 
+    mutate(
+      area = st_area(.)
+    )
+  
+  share = b %>% 
+    st_intersection(grid) %>% 
+    mutate(
+      share = units::drop_units(st_area(.) / area)
+    )
+  return(share)
+}
+
+
+areas_share = areaIntersection(grid, gems)
+
+
+ggplot() +
+  geom_sf(data = areas_share,
+          aes(fill = share))  +
+  theme_void()
+
+```
+
+
+
+
+### Unions
+
+
+
+
+
+
+
+

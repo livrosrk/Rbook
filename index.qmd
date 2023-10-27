@@ -1,14 +1,18 @@
 --- 
-title: "R"
+title: "Index"
 author: "Robin Kohrs"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 description: |
   This is a book about what I learned with R
-link-citations: yes
+link-citations: true
 github-repo: rstudio/bookdown-demo
 ---
 
 # This is the index page
+
+
+
+
 

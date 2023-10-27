@@ -52,41 +52,86 @@ mtcars[, idx] %>% head
 
 **Approach 1**
 
-> select(where(function(x){
-    mean(x) > ...
-}))
+
+```{r}
+#| code-fold: false
+
+# setting the value in the second row and third to nineth column to na
+mtcars_copy = mtcars
+mtcars_copy[2,3:9] = NA
+mtcars_copy %>% head
+
+```
+
+**1. `where`-tidyselect**
+
+- use the tidy-select `where(fn)` function. `fn` is a function that takes an vector, in this case the entire column, as input. Can be an anonymus function!
 
 
 ```{r}
-mtcars_copy = mtcars
-mtcars_copy[2,2] = NA
-mtcars_copy %>% head
-
-# 1. 
 mtcars_copy %>%
   select(where(function(x) {
     sum(is.na(x)) == 0
   })) %>% head
+```
+
+**2. `base-r colsums**
+
+- use the base-r `colSums` function which takes only numeric arrays or dataframes as input
+- `is.na(df)` checks for each value in the df if it is `NA`. 
+
+- And then it implicitly is numeric as `false` = 0 and `true` = 1
+
+```{r}
 
 # 2. base r
 mtcars_copy[, colSums(is.na(mtcars_copy)) == 0]
 
+```
+
+**3. apply**
+
+- a dataframe is essentially a list of vectors. So we can iterate over it with any mapping-function like `apply` or `map`
+
+- For the `MARGIN`-argument we set it to 2. So for the **columns**
+```{r}
+apply(mtcars_copy, 2, function(x)sum(is.na(x)) == 0)
+```
+
+- if we were to set it to one, we would iterate over the rows. All but the second row (Mazda RX4 Wag) will return true
+
+```{r}
+apply(mtcars_copy, 1, function(x)sum(is.na(x)) == 0)
+```
+
+- finally we can use these indeces of the columsn to select them in `[,col_indices]`
+
+```{r}
 # 3. apply
 mtcars_copy[, apply(mtcars_copy, 2, function(x) sum(is.na(x)) == 0)]
+```
+
+**4. using `any`**
+
+- Similar as above. Just not any can be `NA`
+
+```{r}
 
 # using any
 mtcars_copy[, apply(mtcars_copy, 2, function(x) !any(is.na(x)))]
 ```
 
-### Selecting Columns if the mean is > ...
+### Selecting Columns if the mean is above ten or it is a numeric column
+
+
+
+**dplyr select**
 
 ```{r}
 # add a string column
 mtcars["string"] = "a"
 
 # select only string columns or numeric ones with a mean > 10
-
-# Should both work!!
 
 mtcars %>%
   dplyr::select(
@@ -107,6 +152,37 @@ mtcars %>%
   )
 ```
 
+**apply|map**
+
+take care !Apply returns weird classes!!
+
+Almost all of them should be true! Except the last one...
+
+```{r}
+#| code-fold: false
+apply(mtcars, 2, is.numeric)
+```
+
+- so better use `map_lgl`
+
+```{r}
+f_ = function(df) {
+  
+  idx = map_lgl(df, function(x) {
+    if (is.numeric(x)) {
+      return(mean(x) > 20)
+    }
+    
+    if (is.character(x)) {
+      return(TRUE)
+    }
+  })
+  return(idx)
+}
+
+mtcars[,f_(mtcars)]
+```
+
 
 ### Select Columns if the first value in the column is ...
 
@@ -119,7 +195,7 @@ mtcars %>%
   )
 ```
 
-## where vs "normal" tidy select
+### where vs "normal" tidy select
 
 The docs say about where:
 
@@ -138,6 +214,7 @@ This works because the "normal" select also takes indexes and by looping over th
 library(purrr)
 mtcars %>% select(which(map_dbl(.,
                                 ~ mean(.x > 10)) == 1)) %>% head(n=2)
+
 ```
 
 The same with `where` just that we need to take care of the string column as the function would return `NA` and that cant be used as index..
@@ -149,19 +226,41 @@ mtcars %>% select(where(~mean(.x) > 10 & !is.na(mean(.x))))
 
 
 
-
-
 ## Filtering Rows
 
-## Rowwise Compute new Column with subset of existing columns
+## Adding new Columns
+
+
+### Rowwise Compute value for new column with subset of existing columns
 
 ```{r}
+# pmap loops over multiple lists|vectors at the same time
+# in this case all the numeric columns in mtcars
+# the ~median(c(...)) says take all the cols
 mtcars %>% 
   mutate(
     med = pmap_dbl(select(., where(is.numeric)), ~median(c(...), na.rm = T))
   )  %>% glimpse
 ```
 
+do the same as above, but only use two cols and get their mean
+
+```{r}
+mtcars %>% 
+  mutate(
+    med = pmap_dbl(select(., matches("disp|hp")), ~median(c(...), na.rm = T))
+  )  %>% glimpse
+```
+
+ or simpler if you know the columns
+
+```{r}
+mtcars %>% 
+  rowwise() %>%
+  mutate(
+    med = median(disp, hp)
+  ) %>% glimpse
+```
 
 
 
@@ -173,22 +272,22 @@ mtcars %>%
 
 2. summarise get the max value per group
 
-3. `inneer_join` the result with the original data-frame
+3. `inner_join` the result with the original data-frame
 
 ```{r}
 
-# which of the cyl-groups  contains the two highest disp
+# which of the cyl-groups  contains the highest disp
 
-top12 = mtcars %>%
+top = mtcars %>%
   group_by(cyl) %>%
   summarise(m = max(disp)) %>%
   arrange(desc(m)) %>%
   ungroup() %>%
-  mutate(top2 = if_else(row_number() %in% c(1,2), T, F)) %>% 
+  mutate(top2 = if_else(row_number() == 1, T, F)) %>% 
   inner_join(
     ., mtcars, by=c("cyl")
   )
-
+top
 ```
 
 ##### example of STACKOVERFLOW
@@ -236,13 +335,9 @@ df %>%
 
 ## list Columns (and `dplyr`)
 
-```{r}
-
-
-```
-
 
 - tibbles and dataframes are lists of vectors!!
+
 ```{r}
 l = tibble::tibble(x = runif(10),
                    y = 1:10)
@@ -304,7 +399,6 @@ mtcars_names_per_cyl = mtcars %>%
 
 
 - What if you want to manipulate each vector before putting it into the list column
-
 
 ```{r}
 mtcars_names_per_cyl_sorted = mtcars %>%

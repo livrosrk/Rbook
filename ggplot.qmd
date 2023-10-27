@@ -1,4 +1,4 @@
-# GGPLOT
+# Ggplot
 
 ```{r}
 library(ggplot2)
