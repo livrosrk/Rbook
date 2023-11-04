@@ -38,10 +38,17 @@ per_district = aggregate(au_temp_jan_mar, vienna, FUN=mean)
 plot(per_district)
 ```
 
-## In Which month was the max temp for each district
+## In which month was the max temp for each district
+
+Unsurprisingle it was in march...
 
 ```{r}
-st_apply(au_temp_jan_mar, vienna, which.max)
+per_district_max = aggregate(au_temp_jan_mar, vienna, max)
+
+w = st_apply(per_district_max, "geometry", function(x){
+  return(ifelse(all(is.na(x)), NA, which.max(x)))
+})
+ggplot() + geom_stars(data=w)
 ```
 
 ## For each value in the timedimension find the max cell (with geocoordinates)
@@ -51,10 +58,7 @@ st_apply(au_temp_jan_mar, vienna, which.max)
 jan = au_temp_jan_mar[,,,1]
 # find the max cell and its centroid
 which.max(jan[[1]])
-
-
 ```
-
 
 
 ## Dimensions

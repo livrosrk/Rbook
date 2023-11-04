@@ -22,5 +22,7 @@ format:
     code-fold: true
   pdf:
     documentclass: scrreprt
+execute: 
+  warning: false 
 
 

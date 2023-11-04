@@ -14,6 +14,7 @@ library(geos)
 
 
 ```{r}
+#| include: false
 elev = rast(system.file("raster/elev.tif", package = "spData"))
 grain = rast(system.file("raster/grain.tif", package = "spData"))
 ```
@@ -29,13 +30,13 @@ grain = rast(system.file("raster/grain.tif", package = "spData"))
 - for each non-geometry variable, the attribute-geometry relationship. What is that? read here: https://r-spatial.org/book/05-Attributes.html#exercises
 
 ```{r}
-attributes(canterbury)
+attributes(nz)
 ```
 
 > What attributes does a sfc-geometry list-column have?
 
 ```{r}
-attributes(canterbury$geom)
+attributes(nz$geom)
 ```
 
 
@@ -47,7 +48,7 @@ attributes(canterbury$geom)
 
 - Taking a spatial object and returning only features that relate in space to another object 
 
-- As in attribute subsettung the square bracket syntax can be used
+- As in attribute subsetting the square bracket syntax can be used
 
 - `x[y,,op=st_intersect]` where `x` is an `sf` object of which these rows will be returned that intersect with `y`
 
@@ -89,7 +90,7 @@ plot(gems[0], add=T, border="red")
 ```
 
 
-<div style="font-size: 2rem">How many Gemeinden intersect with each grid cell?</div>
+<div style="font-size: 2rem">How many districts intersect with each grid cell?</div>
 
 
 
@@ -130,6 +131,8 @@ ggplot() +
 > GEOS
 
 <div style="font-size: 2rem">Doing the same in geos</div>
+
+Oh and its so much faster...
 
 ```{r}
 geosIntersect = function(a, b){

@@ -180,7 +180,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#stars-structure" id="toc-stars-structure" class="nav-link active" data-scroll-target="#stars-structure"><span class="header-section-number">6.1</span> stars structure</a></li>
   <li><a href="#read-data" id="toc-read-data" class="nav-link" data-scroll-target="#read-data"><span class="header-section-number">6.2</span> read data</a></li>
-  <li><a href="#dimensions" id="toc-dimensions" class="nav-link" data-scroll-target="#dimensions"><span class="header-section-number">6.3</span> Dimensions</a></li>
+  <li><a href="#find-mean-temperature-for-jan-feb-and-march-for-each-district-in-vienna" id="toc-find-mean-temperature-for-jan-feb-and-march-for-each-district-in-vienna" class="nav-link" data-scroll-target="#find-mean-temperature-for-jan-feb-and-march-for-each-district-in-vienna"><span class="header-section-number">6.3</span> Find mean temperature for Jan, Feb and March for each District in Vienna</a></li>
+  <li><a href="#in-which-month-was-the-max-temp-for-each-district" id="toc-in-which-month-was-the-max-temp-for-each-district" class="nav-link" data-scroll-target="#in-which-month-was-the-max-temp-for-each-district"><span class="header-section-number">6.4</span> In which month was the max temp for each district</a></li>
+  <li><a href="#for-each-value-in-the-timedimension-find-the-max-cell-with-geocoordinates" id="toc-for-each-value-in-the-timedimension-find-the-max-cell-with-geocoordinates" class="nav-link" data-scroll-target="#for-each-value-in-the-timedimension-find-the-max-cell-with-geocoordinates"><span class="header-section-number">6.5</span> For each value in the timedimension find the max cell (with geocoordinates)</a></li>
+  <li><a href="#dimensions" id="toc-dimensions" class="nav-link" data-scroll-target="#dimensions"><span class="header-section-number">6.6</span> Dimensions</a></li>
+  <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes"><span class="header-section-number">6.7</span> Attributes</a></li>
   </ul>
 </nav>
     </div>
@@ -207,24 +211,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stars)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: abind</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: sf</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>here() starts at /home/robin/projects/personal/r/Rbook</code></pre>
-</div>
 </div>
 <section id="stars-structure" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="stars-structure"><span class="header-section-number">6.1</span> stars structure</h2>
@@ -236,51 +227,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="read-data" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="read-data"><span class="header-section-number">6.2</span> read data</h2>
+<blockquote class="blockquote">
+<p>Monthly mean air temperature data from Geosphere</p>
+</blockquote>
+<ul>
+<li>https://dataset.api.hub.geosphere.at/app/frontend/raster/historical/spartacus-v2-1m-1km</li>
+</ul>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>au_temp_jan_mar <span class="ot">=</span> <span class="fu">read_ncdf</span>(<span class="fu">here</span>(<span class="st">"data/geodata/SPARTACUS - Spatial Dataset for Climate in Austria Datensatz_202301_202303.nc"</span>)) <span class="sc">%&gt;%</span> <span class="fu">st_set_crs</span>(<span class="st">"EPSG:31287"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>no 'var' specified, using TM</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>other available variables:
- lambert_conformal_conic, lat, lon, time, x, y</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Will return stars object with 576408 cells.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in getGeoDatum(gm): Didn't find a longitude of prime meridian for
-datum, assuming 0.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in getGeoDatum(gm): Didn't find a semi major axis for datum, assuming
-WGS84 6378137.0 meters</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in getGeoDatum(gm): Didn't find an inverse flattening value, assuming
-WGS84 298.257223563</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in `st_crs&lt;-.dimensions`(`*tmp*`, value = value): replacing CRS does
-not reproject data: use st_transform, or st_warp to warp to a new CRS</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(au_temp_jan_mar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># spartacus temp data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>au_temp_jan_mar <span class="ot">=</span> <span class="fu">read_ncdf</span>(<span class="fu">here</span>(<span class="st">"data/geodata/SPARTACUS - Spatial Dataset for Climate in Austria Datensatz_202301_202303.nc"</span>)) <span class="sc">%&gt;%</span> <span class="fu">st_set_crs</span>(<span class="st">"EPSG:3416"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># vienna for aggregation</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>vienna <span class="ot">=</span> <span class="fu">read_sf</span>(<span class="fu">here</span>(<span class="st">"data/geodata/gems_oe_31287.fgb"</span>)) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">str_detect</span>(g_id, <span class="st">"^9.*"</span>)) <span class="sc">%&gt;%</span> <span class="fu">st_transform</span>(<span class="dv">3416</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(au_temp_jan_mar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="stars_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="dimensions" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="dimensions"><span class="header-section-number">6.3</span> Dimensions</h2>
+<section id="find-mean-temperature-for-jan-feb-and-march-for-each-district-in-vienna" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="find-mean-temperature-for-jan-feb-and-march-for-each-district-in-vienna"><span class="header-section-number">6.3</span> Find mean temperature for Jan, Feb and March for each District in Vienna</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>per_district <span class="ot">=</span> <span class="fu">aggregate</span>(au_temp_jan_mar, vienna, <span class="at">FUN=</span>mean)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(per_district)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="stars_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="in-which-month-was-the-max-temp-for-each-district" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="in-which-month-was-the-max-temp-for-each-district"><span class="header-section-number">6.4</span> In which month was the max temp for each district</h2>
+<p>Unsurprisingle it was in march…</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>per_district_max <span class="ot">=</span> <span class="fu">aggregate</span>(au_temp_jan_mar, vienna, max)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>w <span class="ot">=</span> <span class="fu">st_apply</span>(per_district_max, <span class="st">"geometry"</span>, <span class="cf">function</span>(x){</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">ifelse</span>(<span class="fu">all</span>(<span class="fu">is.na</span>(x)), <span class="cn">NA</span>, <span class="fu">which.max</span>(x)))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_stars</span>(<span class="at">data=</span>w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="stars_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="for-each-value-in-the-timedimension-find-the-max-cell-with-geocoordinates" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="for-each-value-in-the-timedimension-find-the-max-cell-with-geocoordinates"><span class="header-section-number">6.5</span> For each value in the timedimension find the max cell (with geocoordinates)</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># start with one</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>jan <span class="ot">=</span> au_temp_jan_mar[,,,<span class="dv">1</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># find the max cell and its centroid</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(jan[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 131330</code></pre>
+</div>
+</div>
+</section>
+<section id="dimensions" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="dimensions"><span class="header-section-number">6.6</span> Dimensions</h2>
 <ul>
 <li>Dimensions is a named list</li>
 </ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dimenstions_attr <span class="ot">=</span> <span class="fu">attr</span>(au_temp_jan_mar, <span class="st">"dimensions"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dimenstions_attr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     from  to offset delta                   refsys
+x       1 584 112000  1000 ETRS89 / Austria Lambert
+y       1 329 258000  1000 ETRS89 / Austria Lambert
+time    1   3     NA    NA                  POSIXct
+                                             values x/y
+x                                              NULL [x]
+y                                              NULL [y]
+time 2023-01-01 UTC, 2023-02-01 UTC, 2023-03-01 UTC    </code></pre>
+</div>
+</div>
+</section>
+<section id="attributes" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="attributes"><span class="header-section-number">6.7</span> Attributes</h2>
 
 
 </section>
