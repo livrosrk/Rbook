@@ -25,10 +25,10 @@ library(here)
 #| message: false
 
 # spartacus temp data
-au_temp_jan_mar = read_ncdf(here("data/geodata/SPARTACUS - Spatial Dataset for Climate in Austria Datensatz_202301_202303.nc")) %>% st_set_crs("EPSG:31287")
+au_temp_jan_mar = read_ncdf(here("data/geodata/SPARTACUS - Spatial Dataset for Climate in Austria Datensatz_202301_202303.nc")) %>% st_set_crs("EPSG:3416")
 
 # vienna for aggregation
-vienna = read_sf(here("data/geodata/gems_oe_31287.fgb")) %>% dplyr::filter(str_detect(g_id, "^9.*"))
+vienna = read_sf(here("data/geodata/gems_oe_31287.fgb")) %>% dplyr::filter(str_detect(g_id, "^9.*")) %>% st_transform(3416)
 plot(au_temp_jan_mar)
 ```
 ## Find mean temperature for Jan, Feb and March for each District in Vienna
@@ -44,6 +44,16 @@ plot(per_district)
 st_apply(au_temp_jan_mar, vienna, which.max)
 ```
 
+## For each value in the timedimension find the max cell (with geocoordinates)
+
+```{r}
+# start with one
+jan = au_temp_jan_mar[,,,1]
+# find the max cell and its centroid
+which.max(jan[[1]])
+
+
+```
 
 
 
